@@ -1,0 +1,37 @@
+﻿  PKG_lab4.cpp
+D:\PKG\PKG_lab4\PKG_lab4\PKG_lab4.cpp(549,9): warning C4244: =: преобразование "int" в "float", возможна потеря данных
+D:\PKG\PKG_lab4\PKG_lab4\PKG_lab4.cpp(550,9): warning C4244: =: преобразование "int" в "float", возможна потеря данных
+D:\PKG\PKG_lab4\PKG_lab4\PKG_lab4.cpp(551,13): warning C4244: =: преобразование "int" в "float", возможна потеря данных
+D:\PKG\PKG_lab4\PKG_lab4\PKG_lab4.cpp(552,13): warning C4244: =: преобразование "int" в "float", возможна потеря данных
+D:\PKG\PKG_lab4\PKG_lab4\PKG_lab4.cpp(553,16): warning C4244: =: преобразование "int" в "float", возможна потеря данных
+D:\PKG\PKG_lab4\PKG_lab4\PKG_lab4.cpp(554,16): warning C4244: =: преобразование "int" в "float", возможна потеря данных
+D:\PKG\PKG_lab4\PKG_lab4\PKG_lab4.cpp(555,16): warning C4244: =: преобразование "float" в "int", возможна потеря данных
+D:\PKG\PKG_lab4\PKG_lab4\PKG_lab4.cpp(565,22): warning C4244: -=: преобразование "float" в "int", возможна потеря данных
+D:\PKG\PKG_lab4\PKG_lab4\PKG_lab4.cpp(570,22): warning C4244: +=: преобразование "float" в "int", возможна потеря данных
+D:\PKG\PKG_lab4\PKG_lab4\PKG_lab4.cpp(613,38): warning C4244: аргумент: преобразование "int" в "float", возможна потеря данных
+D:\PKG\PKG_lab4\PKG_lab4\PKG_lab4.cpp(613,33): warning C4244: аргумент: преобразование "int" в "float", возможна потеря данных
+D:\PKG\PKG_lab4\PKG_lab4\PKG_lab4.cpp(621,38): warning C4244: аргумент: преобразование "int" в "float", возможна потеря данных
+D:\PKG\PKG_lab4\PKG_lab4\PKG_lab4.cpp(621,33): warning C4244: аргумент: преобразование "int" в "float", возможна потеря данных
+D:\PKG\PKG_lab4\PKG_lab4\PKG_lab4.cpp(631,38): warning C4244: аргумент: преобразование "int" в "float", возможна потеря данных
+D:\PKG\PKG_lab4\PKG_lab4\PKG_lab4.cpp(631,33): warning C4244: аргумент: преобразование "int" в "float", возможна потеря данных
+D:\PKG\PKG_lab4\PKG_lab4\PKG_lab4.cpp(639,38): warning C4244: аргумент: преобразование "int" в "float", возможна потеря данных
+D:\PKG\PKG_lab4\PKG_lab4\PKG_lab4.cpp(639,33): warning C4244: аргумент: преобразование "int" в "float", возможна потеря данных
+D:\PKG\PKG_lab4\PKG_lab4\PKG_lab4.cpp(677,27): warning C4244: =: преобразование "float" в "int", возможна потеря данных
+D:\PKG\PKG_lab4\PKG_lab4\PKG_lab4.cpp(683,27): warning C4244: =: преобразование "float" в "int", возможна потеря данных
+D:\PKG\PKG_lab4\PKG_lab4\PKG_lab4.cpp(691,54): warning C4244: =: преобразование "float" в "int", возможна потеря данных
+D:\PKG\PKG_lab4\PKG_lab4\PKG_lab4.cpp(692,66): warning C4244: =: преобразование "float" в "int", возможна потеря данных
+D:\PKG\PKG_lab4\PKG_lab4\PKG_lab4.cpp(746,23): warning C4244: =: преобразование "double" в "int", возможна потеря данных
+D:\PKG\PKG_lab4\PKG_lab4\PKG_lab4.cpp(747,23): warning C4244: =: преобразование "double" в "int", возможна потеря данных
+D:\PKG\PKG_lab4\PKG_lab4\PKG_lab4.cpp(756,9): warning C4101: pointCount: неиспользованная локальная переменная
+D:\PKG\PKG_lab4\PKG_lab4\PKG_lab4.cpp(922,22): warning C4244: =: преобразование "double" в "int", возможна потеря данных
+D:\PKG\PKG_lab4\PKG_lab4\PKG_lab4.cpp(923,22): warning C4244: =: преобразование "double" в "int", возможна потеря данных
+D:\PKG\PKG_lab4\PKG_lab4\PKG_lab4.cpp(924,23): warning C4244: =: преобразование "double" в "int", возможна потеря данных
+D:\PKG\PKG_lab4\PKG_lab4\PKG_lab4.cpp(925,23): warning C4244: =: преобразование "double" в "int", возможна потеря данных
+D:\PKG\PKG_lab4\PKG_lab4\PKG_lab4.cpp(931,22): warning C4244: =: преобразование "double" в "int", возможна потеря данных
+D:\PKG\PKG_lab4\PKG_lab4\PKG_lab4.cpp(932,22): warning C4244: =: преобразование "double" в "int", возможна потеря данных
+D:\PKG\PKG_lab4\PKG_lab4\PKG_lab4.cpp(1036,5): warning C4267: инициализация: преобразование из "size_t" в "int"; возможна потеря данных
+D:\PKG\PKG_lab4\PKG_lab4\PKG_lab4.cpp(1105,37): warning C4267: =: преобразование из "size_t" в "int"; возможна потеря данных
+D:\PKG\PKG_lab4\PKG_lab4\PKG_lab4.cpp(1117,49): warning C4267: инициализация: преобразование из "size_t" в "int"; возможна потеря данных
+D:\PKG\PKG_lab4\PKG_lab4\PKG_lab4.cpp(1132,40): warning C4267: /=: преобразование из "size_t" в "int"; возможна потеря данных
+D:\PKG\PKG_lab4\PKG_lab4\PKG_lab4.cpp(1133,40): warning C4267: /=: преобразование из "size_t" в "int"; возможна потеря данных
+  PKG_lab4.vcxproj -> D:\PKG\PKG_lab4\x64\Debug\PKG_lab4.exe
