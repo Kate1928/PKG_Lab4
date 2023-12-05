@@ -7,7 +7,6 @@
 #include <vector>
 #include <math.h>
 
-//#include "Container.h"
 
 using namespace std;
 using namespace sf;
@@ -713,49 +712,6 @@ bool intersection_lineseg(int x1, int y1, int x2, int y2, int xa, int ya, int xb
     return true;
 }
 
-//intersectionPoint
-
-//
-//bool intersectionPoint(int x1, int y1, int x2, int y2, int x3, int y3, int x4, int y4)
-//{
-//    double t1, t2;
-//    double v = x2 - x1;
-//    double w = y2 - y1;
-//
-//    double v2 = x4 - x3;
-//    double w2 = y4 - y3;
-//
-//    t2 = (-w * x3 + w * x1 + v * y3 - v * y1) / (w * v2 - v * w2);
-//
-//    /*t2 = x1 * y3 - x1 * y1 + 2 * x2 * y1 - x2 * y2 - x1 * y3 - x3 * y1 + x3 * y2;
-//    t2 = t2 / (double)(x1 * y3 - y4 * x1 - x2 * y3 + y4 * x2 - x3 * y1 + x3 * y2 + x4 * y1 - x4 * y2);*/
-//    // Вычисляем длины векторов
-//    double len1 = sqrt((x2-x1) * (x2-x1) + (y2-y1) * (y2 - y1));
-//    double len2 = sqrt((x4 - x3) * (x4 - x3) + (y4 - y3) * (y4 - y3));
-//    // Нормализация векторов - создание единичного вектора направления
-//    double x = (x2 - x1) / len1;
-//    double y = (y2 - y1) / len1;
-//    double X = (x4 - x3) / len2;
-//    double Y = (y4 - y3) / len2;
-//    // Точность совпадения величин double
-//    double epsilon = 0.000001;
-//    // Проверка на параллельность с определенной точностью.
-//    if (abs(x - X) < epsilon && abs(y - Y) < epsilon)
-//    {
-//        return false;
-//    }
-//    
-//    t1 = (x3 - x1 + (x4 - x3) * t2) / v;
-//    // Если один из параметров меньше 0 и больше 1, значит пересечения нет.
-//    if (t1 <= 0 || t1 >= 1 || t2 < 0 || t2 > 1)
-//    {
-//        return false;
-//    }
-//    // Координаты точки пересечения
-//    crossPoint.x = x3 + (x4 - x3) * t2;
-//    crossPoint.y = y3 + (y4 - y3) * t2;
-//    return true;
-//}
 
 void sutherlandHodgman(vector<point> shape, int x1, int y1, int x2, int y2)
 {
@@ -766,10 +722,7 @@ void sutherlandHodgman(vector<point> shape, int x1, int y1, int x2, int y2)
     
     if (a1 == false && a2 == false)
     {
-        /*p.x = x2;
-        p.y = y2;
-        pointVisible.push_back(p);*/
-        //pointCount++;
+        
     }
 
     if (a1 == true && a2 == true)
@@ -777,7 +730,6 @@ void sutherlandHodgman(vector<point> shape, int x1, int y1, int x2, int y2)
         p.x = x2;
         p.y = y2;
         pointUnvisible.push_back(p);
-        //pointVisible.push_back(p);
     }
 
     if (a1 == false && a2 == true)
@@ -788,14 +740,12 @@ void sutherlandHodgman(vector<point> shape, int x1, int y1, int x2, int y2)
             if (intersection_lineseg(x1, y1, x2, y2, shape[i].x, shape[i].y, shape[i + 1].x, shape[i + 1].y) )
             {
                 pointUnvisible.push_back(crossPoint);
-                //pointVisible.push_back(crossPoint);
                 
             }
         }
         if (intersection_lineseg(x1, y1, x2, y2, shape[2].x, shape[2].y, shape[0].x, shape[0].y))
         {
             pointUnvisible.push_back(crossPoint);
-            //pointVisible.push_back(crossPoint);
         }
         p.x = x2;
         p.y = y2;
@@ -807,21 +757,15 @@ void sutherlandHodgman(vector<point> shape, int x1, int y1, int x2, int y2)
         if (intersection_lineseg(x1, y1, x2, y2, shape[0].x, shape[0].y, shape[1].x, shape[1].y))
         {
             pointUnvisible.push_back(crossPoint);
-            //pointVisible.push_back(crossPoint);
         }
         if (intersection_lineseg(x1, y1, x2, y2, shape[1].x, shape[1].y, shape[2].x, shape[2].y))
         {
             pointUnvisible.push_back(crossPoint);
-            //pointVisible.push_back(crossPoint);
         }
         if (intersection_lineseg(x1, y1, x2, y2, shape[2].x, shape[2].y, shape[0].x, shape[0].y))
         {
             pointUnvisible.push_back(crossPoint);
-            //pointVisible.push_back(crossPoint);
         }
-        /*p.x = x2;
-        p.y = y2;
-        pointVisible.push_back(p);*/
     }
 
 }
@@ -901,89 +845,10 @@ void sutherlandHodgmanVisible(vector<point> shape, int x1, int y1, int x2, int y
 
 }
 
-vector <vector<point>> pointA;
-vector <vector<point>> pointC;
-vector<point> pointZ;
+//vector <vector<point>> pointA;
+//vector <vector<point>> pointC;
+//vector<point> pointZ;
 
-void listA(vector<point> shapeA, vector<point> shapeC)
-{
-
-}
-//
-//void weilerAtherton(vector<point> shapeA, vector<point> shapeC)
-//{   
-//    point p;
-//    p.x = 0;
-//    p.y = 0;
-//    pointZ.push_back(p);
-//    pointZ.push_back(p);
-//
-//    //list A
-//    
-//    for (int i = 0; i < shapeA.size() - 1; i++)
-//    {
-//        bool a1 = pointBelong(shapeC, shapeA[i].x, shapeA[i].y);
-//        bool a2 = pointBelong(shapeC, shapeA[i + 1].x, shapeA[i + 1].y);
-//        if (a1 == true && a2 == false)
-//        {
-//            if (intersection_lineseg(shapeA[i].x, shapeA[i].y, shapeA[i + 1].x, shapeA[i + 1].y, shapeC[0].x, shapeC[0].y, shapeC[1].x, shapeC[1].y))
-//            {
-//                pointZ[0] = crossPoint;
-//                pointZ[1].x = 1; //out
-//                pointA.push_back(pointZ);
-//            }
-//            if (intersection_lineseg(shapeA[i].x, shapeA[i].y, shapeA[i + 1].x, shapeA[i + 1].y, shapeC[1].x, shapeC[1].y, shapeC[2].x, shapeC[2].y))
-//            {
-//                pointZ[0] = crossPoint;
-//                pointZ[1].x = 1; //out
-//                pointA.push_back(pointZ);
-//            }
-//            if (intersection_lineseg(shapeA[i].x, shapeA[i].y, shapeA[i + 1].x, shapeA[i + 1].y, shapeC[2].x, shapeC[2].y, shapeC[0].x, shapeC[0].y))
-//            {
-//                pointZ[0] = crossPoint;
-//                pointZ[1].x = 1; //out
-//                pointA.push_back(pointZ);
-//            }
-//            pointZ[0] = shapeA[i + 1];
-//            pointZ[1].x = 2; //out not cross
-//            pointA.push_back(pointZ);
-//
-//        }
-//
-//        if (a1 == false && a2 == true)
-//        {
-//            if (intersection_lineseg(shapeA[i].x, shapeA[i].y, shapeA[i + 1].x, shapeA[i + 1].y, shapeC[0].x, shapeC[0].y, shapeC[1].x, shapeC[1].y))
-//            {
-//                pointZ[0] = crossPoint;
-//                pointZ[1].x = 0; //in
-//                pointA.push_back(pointZ);
-//            }
-//            if (intersection_lineseg(shapeA[i].x, shapeA[i].y, shapeA[i + 1].x, shapeA[i + 1].y, shapeC[1].x, shapeC[1].y, shapeC[2].x, shapeC[2].y))
-//            {
-//                pointZ[0] = crossPoint;
-//                pointZ[1].x = 0; //in
-//                pointA.push_back(pointZ);
-//            }
-//            if (intersection_lineseg(shapeA[i].x, shapeA[i].y, shapeA[i + 1].x, shapeA[i + 1].y, shapeC[2].x, shapeC[2].y, shapeC[0].x, shapeC[0].y))
-//            {
-//                pointZ[0] = crossPoint;
-//                pointZ[1].x = 0; //in
-//                pointA.push_back(pointZ);
-//            }
-//            
-//
-//        }
-//        if (a1 == false && a2 == false)
-//        {
-//            pointZ[0] = shapeA[i + 1];
-//            pointZ[1].x = 2; //out not cross
-//            pointA.push_back(pointZ);
-//        }
-//
-//        
-//    }
-//    
-//}
 
 // Defining region codes
 const int INSIDE = 0; // 0000
@@ -1132,9 +997,10 @@ void сohenSutherland(int x1, int y1, int x2, int y2, vector<point> shape)
     }
 }
 
+
 void modeADraw(RenderWindow& window, RectangleShape& square)
 {
- //--------------------------------------------------------------------sutherlandHodgman get Visible part---------------------------------------------------------------------------------------
+    //--------------------------------------------------------------------sutherlandHodgman get Visible part---------------------------------------------------------------------------------------
     int j, k;
     for (int i = shapes.size() - 1; i > 0; i--)
     {
@@ -1251,10 +1117,10 @@ void modeADraw(RenderWindow& window, RectangleShape& square)
     areaB(328, 55, color, color2, window, square);
 }
 
+
 void modeBDraw(RenderWindow& window, RectangleShape& square)
 {
     int j, k;
-    pointAllVisible.clear();
     //--------------------------------------------------------------------sutherlandHodgman---------------------------------------------------------------------------------------
 
     for (int i = shapes.size() - 1; i > 0; i--)
@@ -1281,42 +1147,103 @@ void modeBDraw(RenderWindow& window, RectangleShape& square)
             j--;
         }
     }
+    //--------------------------------------------------------------------sutherlandHodgman get Visible part---------------------------------------------------------------------------------------
+    for (int i = shapes.size() - 1; i > 0; i--)
+    {
+        j = i - 1;
+        while (j > 0)
+        {
+            for (int k = 0; k < shapes[i].size() - 1; k++)
+            {
+                sutherlandHodgmanVisible(shapes[j], shapes[i][k].x, shapes[i][k].y, shapes[i][k + 1].x, shapes[i][k + 1].y);
+            }
+            int k = shapes[i].size() - 1;
+            sutherlandHodgmanVisible(shapes[j], shapes[i][k].x, shapes[i][k].y, shapes[i][0].x, shapes[i][0].y);
+            shapes[i] = pointVisible;
+            pointVisible.clear();
+            j--;
+        }
+        /*
+        for (int k = 0; k < shapes[j].size() - 1; k++)
+        {
+            sutherlandHodgman(shapes[i], shapes[j][k].x, shapes[j][k].y, shapes[j][k + 1].x, shapes[j][k + 1].y);
+        }
+        int k = shapes[j].size() - 1;
+        sutherlandHodgman(shapes[i], shapes[j][k].x, shapes[j][k].y, shapes[j][0].x, shapes[j][0].y);
+        for (int l = 0; l < shapes[i].size(); l++)
+        {
+            if ((pointVisible[0].x - shapes[i][0].x) * (by - ay) == (bx - ax) * (my - ay)) {
+                if (min(ay, by) <= my && (max(ay, by) >= my) && min(ax, bx) <= mx && max(ax, bx) >= mx) {
+                    cout << "YES";
+                    return 0;
+                }
+            }
+        }
+        shapes[i] = pointVisible;
+        pointVisible.clear();*/
 
+    }
     //---------------------------------------------------------------------сohenSutherland-----------------------------------------------------------------------------------------
 
-    for (int i = 1; i < pointAllUnvisible.size(); i++)
+    for (int i = 1; i < shapes.size(); i++)
     {
-        for (int j = 0; j < pointAllUnvisible[i].size() - 1; j++)
+        for (int j = 0; j < shapes[i].size() - 1; j++)
         {
-            сohenSutherland(pointAllUnvisible[i][j].x, pointAllUnvisible[i][j].y, pointAllUnvisible[i][j + 1].x, pointAllUnvisible[i][j + 1].y, pointAllUnvisible[i]);
+            сohenSutherland(shapes[i][j].x, shapes[i][j].y, shapes[i][j + 1].x, shapes[i][j + 1].y, shapes[i]);
         }
-        int t = pointAllUnvisible[i].size() - 1;
-        сohenSutherland(pointAllUnvisible[i][t].x, pointAllUnvisible[i][t].y, pointAllUnvisible[i][0].x, pointAllUnvisible[i][0].y, pointAllUnvisible[i]);
+        int t = shapes[i].size() - 1;
+        сohenSutherland(shapes[i][t].x, shapes[i][t].y, shapes[i][0].x, shapes[i][0].y, shapes[i]);
         pointAllVisible.push_back(pointVisible);
         pointVisible.clear();
     }
-    //--------------------------------------------------------------------------отрисовка sutherlandHodgman---------------------------------------------------------------------------------------------------
+
+
+
+    //--------------------------------------------------------------------------отрисовка всего---------------------------------------------------------------------------------------------------
+    //отрисовка
+    Color color, color2;
+    /*for (int i = 1; i < shapes.size(); i++)
+    {
+
+        color2.a = colorOutline[i].a;
+        color2.r = colorOutline[i].r;
+        color2.g = colorOutline[i].g;
+        color2.b = colorOutline[i].b;
+        for (int j = 0; j < shapes[i].size() - 1; j++)
+        {
+            brezenham(shapes[i][j].x, shapes[i][j + 1].x, shapes[i][j].y, shapes[i][j + 1].y, color2, window, square);
+        }
+        brezenham(shapes[i][shapes[i].size() - 1].x, shapes[i][0].x, shapes[i][shapes[i].size() - 1].y, shapes[i][0].y, color2, window, square);
+
+        color.a = colorFill[i].a;
+        color.r = colorFill[i].r;
+        color.g = colorFill[i].g;
+        color.b = colorFill[i].b;
+        areaB(zPointAll[i].x, zPointAll[i].y, color, color2, window, square);
+    }
+    */
+
+    //--------------------------------------------------------------------------отрисовка сohenSutherland-----------------------------------------------------------------------------------------------------
 
     k = pointAllVisible.size() - 1;
-    for (int i = k; i >= 0; i--)
+    for (int i = 0; i <= k; i++)
     {
         Color color, color2;
-        color2.a = 255;
-        color2.r = 5;
-        color2.g = 255;
-        color2.b = 5;
+        color2.a = colorOutline[i + 1].a;
+        color2.r = colorOutline[i + 1].r;
+        color2.g = colorOutline[i + 1].g;
+        color2.b = colorOutline[i + 1].b;
         for (int j = 0; j < pointAllVisible[i].size() - 1; j++)
         {
             brezenham(pointAllVisible[i][j].x, pointAllVisible[i][j + 1].x, pointAllVisible[i][j].y, pointAllVisible[i][j + 1].y, color2, window, square);
         }
         int k2 = pointAllVisible[i].size() - 1;
         brezenham(pointAllVisible[i][k2].x, pointAllVisible[i][0].x, pointAllVisible[i][k2].y, pointAllVisible[i][0].y, color2, window, square);
-        //window.display();
-        //Sleep(900);
-        /*color.a = 255;
-        color.r = 200;
-        color.g = 200;
-        color.b = 0;
+        //Sleep(200);
+        color.a = colorFill[i + 1].a;
+        color.r = colorFill[i + 1].r;
+        color.g = colorFill[i + 1].g;
+        color.b = colorFill[i + 1].b;
         int cx = 0;
         int cy = 0;
         for (int j = 0; j < pointAllVisible[i].size(); j++)
@@ -1326,6 +1253,53 @@ void modeBDraw(RenderWindow& window, RectangleShape& square)
         }
         cx /= pointAllVisible[i].size();
         cy /= pointAllVisible[i].size();
+        if (i == 17)
+        {
+            cx = 250;
+            cy = 50;
+        }
+        areaB(cx, cy, color, color2, window, square);
+    }
+    color.a = colorFill[18].a;
+    color.r = colorFill[18].r;
+    color.g = colorFill[18].g;
+    color.b = colorFill[18].b;
+    areaB(328, 55, color, color2, window, square);
+
+    
+
+    
+    //--------------------------------------------------------------------------отрисовка sutherlandHodgman---------------------------------------------------------------------------------------------------
+
+    k = pointAllUnvisible.size() - 1;
+    for (int i = k; i >= 0; i--)
+    {
+        //Color color, color2;
+        color2.a = 255;
+        color2.r = 5;
+        color2.g = 255;
+        color2.b = 5;
+        for (int j = 0; j < pointAllUnvisible[i].size() - 1; j++)
+        {
+            brezenham(pointAllUnvisible[i][j].x, pointAllUnvisible[i][j + 1].x, pointAllUnvisible[i][j].y, pointAllUnvisible[i][j + 1].y, color2, window, square);
+        }
+        int k2 = pointAllUnvisible[i].size() - 1;
+        brezenham(pointAllUnvisible[i][k2].x, pointAllUnvisible[i][0].x, pointAllUnvisible[i][k2].y, pointAllUnvisible[i][0].y, color2, window, square);
+        //window.display();
+        //Sleep(900);
+        color.a = 255;
+        color.r = 200;
+        color.g = 200;
+        color.b = 0;
+        int cx = 0;
+        int cy = 0;
+        for (int j = 0; j < pointAllUnvisible[i].size(); j++)
+        {
+            cx += pointAllUnvisible[i][j].x;
+            cy += pointAllUnvisible[i][j].y;
+        }
+        cx /= pointAllUnvisible[i].size();
+        cy /= pointAllUnvisible[i].size();
         if (i == 0)
         {
             cx = 345;
@@ -1341,15 +1315,22 @@ void modeBDraw(RenderWindow& window, RectangleShape& square)
             cx = 260;
             cy = 80;
         }
-        if ((0,5 * abs(pointAllVisible[i][0].x * pointAllVisible[i][1].y + pointAllVisible[i][1].x * pointAllVisible[i][2].y + pointAllVisible[i][2].x * pointAllVisible[i][0].y - pointAllVisible[i][1].x * pointAllVisible[i][0].y- pointAllVisible[i][2].x * pointAllVisible[i][1].y - pointAllVisible[i][0].x * pointAllVisible[i][2].y)) > 100)
+        if (i == 10)
+        {
+            cx = 317;
+            cy = 60;
+        }
+        if ((0, 5 * abs(pointAllUnvisible[i][0].x * pointAllUnvisible[i][1].y + pointAllUnvisible[i][1].x * pointAllUnvisible[i][2].y + pointAllUnvisible[i][2].x * pointAllUnvisible[i][0].y - pointAllUnvisible[i][1].x * pointAllUnvisible[i][0].y - pointAllUnvisible[i][2].x * pointAllUnvisible[i][1].y - pointAllUnvisible[i][0].x * pointAllUnvisible[i][2].y)) > 100)
         {
             areaB(cx, cy, color, color2, window, square);
-        }        */
-        
+        }
+
+
     }
 
 
 }
+
 
 int main()
 {
@@ -1367,23 +1348,9 @@ int main()
     modeBDraw(window, square);
     
 
-     
-    
-    
-
-   
-    
-    // 
-    
-    
-
-
-    //}
-
     //window.display();
     //Sleep(1000);
     //window.clear(Color::Blue);
-    
     //Sprite sprite;
     //sprite.setTexture(texture);
     //sprite.setOrigin(sf::Vector2f(-500, -500));
