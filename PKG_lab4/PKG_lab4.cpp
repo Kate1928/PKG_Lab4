@@ -38,17 +38,17 @@ void shapesInit(vector<vector<point>>& shapes, vector<point>& zPointAll, vector<
     point p;
     ARGB color;
     //-----------------------------0-------------------------
-    p.x = 1;
-    p.y = 1;
+    p.x = 50;
+    p.y = 25;
     shape1.push_back(p);
-    p.x = 500;
-    p.y = 1;
+    p.x = 450;
+    p.y = 25;
     shape1.push_back(p);
-    p.x = 500;
-    p.y = 130;
+    p.x = 450;
+    p.y = 120;
     shape1.push_back(p);
-    p.x = 1;
-    p.y = 130;
+    p.x = 50;
+    p.y = 120;
     shape1.push_back(p);
     
     shapes.push_back(shape1);
@@ -957,7 +957,6 @@ void сohenSutherland(int x1, int y1, int x2, int y2, vector<point> shape)
                 p.x = x;
                 p.y = y;
                 pointVisible.push_back(p);
-                
                 code1 = computeCode(x1, y1);
             }
             else {
@@ -997,6 +996,114 @@ void сohenSutherland(int x1, int y1, int x2, int y2, vector<point> shape)
     }
 }
 
+//void сohenSutherlandUnvisible(int x1, int y1, int x2, int y2, vector<point> shape)
+//{
+//    // Вычислить коды регионов для P1, P2
+//    int code1 = computeCode(x1, y1);
+//    int code2 = computeCode(x2, y2);
+//    point p, p1;
+//    bool t = false;
+//
+//
+//    // Инициализировать строку вне прямоугольного окна
+//    bool accept = true;
+//
+//    while (true) {
+//        if (code1 & code2) {
+//            //   Если обе конечные точки находятся за пределами прямоугольника, в одном регионе 
+//            p.x = x2;
+//            p.y = y2;
+//            pointVisible.push_back(p);
+//            if (t)
+//                pointVisible.push_back(p1);
+//            accept = true;
+//            break;
+//        }
+//        else if ((code1 == 0) && (code2 == 0)) {
+//            // Если обе конечные точки лежат внутри прямоугольника
+//            break;
+//        }
+//        else {
+//            // Какой-то отрезок линии лежит внутри прямоугольника
+//            int code_in;
+//            double x, y;
+//
+//            // Хотя бы одна конечная точка находится за пределами прямоугольника, выбераем ее.
+//            if (code1 == 0)
+//                code_in = code1;
+//            else
+//                code_in = code2;
+//
+//            // Найти точку пересечения;
+//            // y = y1 + slope * (x - x1),
+//            // x = x1 + (1 / slope) * (y - y1)
+//            if (code_in & TOP) {
+//                // точка находится над прямоугольником обрезки
+//                x = x1 + (x2 - x1) * (y_max - y1) / (y2 - y1);
+//                y = y_max;
+//            }
+//            else if (code_in & BOTTOM) {
+//                // точка находится под прямоугольником
+//                x = x1 + (x2 - x1) * (y_min - y1) / (y2 - y1);
+//                y = y_min;
+//            }
+//            else if (code_in & RIGHT) {
+//                // точка находится справа от прямоугольника
+//                y = y1 + (y2 - y1) * (x_max - x1) / (x2 - x1);
+//                x = x_max;
+//            }
+//            else if (code_in & LEFT) {
+//                // точка находится слева от прямоугольника
+//                y = y1 + (y2 - y1) * (x_min - x1) / (x2 - x1);
+//                x = x_min;
+//            }
+//
+//            // Теперь точка пересечения x, y найдена.
+//            // Заменяем точку вне прямоугольника
+//            // по точке пересечения
+//            if (code_in == code1) {
+//                x1 = x;
+//                y1 = y;
+//                code1 = computeCode(x1, y1);
+//                p.x = x;
+//                p.y = y;
+//                pointUnvisible.push_back(p);
+//                
+//                
+//                if (pointBelong(shape, x_min, y_min))
+//                {
+//                    p1.x = x_min;
+//                    p1.y = y_min;
+//                    t = true;
+//                }
+//                if (pointBelong(shape, x_max, y_min))
+//                {
+//                    p1.x = x_max;
+//                    p1.y = y_min;
+//                    t = true;
+//                }
+//                if (pointBelong(shape, x_min, y_max))
+//                {
+//                    p1.x = x_min;
+//                    p1.y = y_max;
+//                    t = true;
+//                }
+//                if (pointBelong(shape, x_max, y_max))
+//                {
+//                    p1.x = x_max;
+//                    p1.y = y_max;
+//                    t = true;
+//                }              
+//            }
+//            else {
+//                
+//                x2 = x;
+//                y2 = y;
+//                code2 = computeCode(x2, y2); 
+//            }
+//        }
+//    }
+//}
 
 void modeADraw(RenderWindow& window, RectangleShape& square)
 {
@@ -1114,6 +1221,10 @@ void modeADraw(RenderWindow& window, RectangleShape& square)
         }
         areaB(cx, cy, color, color2, window, square);   
     }
+    color.a = colorFill[18].a;
+    color.r = colorFill[18].r;
+    color.g = colorFill[18].g;
+    color.b = colorFill[18].b;
     areaB(328, 55, color, color2, window, square);
 }
 
@@ -1147,6 +1258,21 @@ void modeBDraw(RenderWindow& window, RectangleShape& square)
             j--;
         }
     }
+    
+    //---------------------------------------------------------------------сohenSutherlandUnvisible-----------------------------------------------------------------------------------------
+
+    /*for (int i = 15; i < shapes.size(); i++)
+    {
+        for (int j = 0; j < shapes[i].size() - 1; j++)
+        {
+            сohenSutherlandUnvisible(shapes[i][j].x, shapes[i][j].y, shapes[i][j + 1].x, shapes[i][j + 1].y, shapes[i]);
+        }
+        int t = shapes[i].size() - 1;
+        сohenSutherlandUnvisible(shapes[i][t].x, shapes[i][t].y, shapes[i][0].x, shapes[i][0].y, shapes[i]);
+        pointAllUnvisible.push_back(pointUnvisible);
+        pointUnvisible.clear();
+    }*/
+
     //--------------------------------------------------------------------sutherlandHodgman get Visible part---------------------------------------------------------------------------------------
     for (int i = shapes.size() - 1; i > 0; i--)
     {
@@ -1197,6 +1323,24 @@ void modeBDraw(RenderWindow& window, RectangleShape& square)
         pointVisible.clear();
     }
 
+
+    //---------------------------------------------------------------------сohenSutherlandForUnvisiblePart-----------------------------------------------------------------------------------------
+
+    for (int i = 0; i < pointAllUnvisible.size(); i++)
+    {
+        for (int j = 0; j < pointAllUnvisible[i].size() - 1; j++)
+        {
+            сohenSutherland(pointAllUnvisible[i][j].x, pointAllUnvisible[i][j].y, pointAllUnvisible[i][j + 1].x, pointAllUnvisible[i][j + 1].y, pointAllUnvisible[i]);
+        }
+        int t = pointAllUnvisible[i].size() - 1;
+        сohenSutherland(pointAllUnvisible[i][t].x, pointAllUnvisible[i][t].y, pointAllUnvisible[i][0].x, pointAllUnvisible[i][0].y, pointAllUnvisible[i]);
+        pointAllUnvisible[i] = pointVisible;
+        //pointAllVisible.push_back(pointVisible);
+        pointVisible.clear();
+    }
+
+
+    
 
 
     //--------------------------------------------------------------------------отрисовка всего---------------------------------------------------------------------------------------------------
@@ -1344,8 +1488,17 @@ int main()
     window.clear(color1);
     int j, k;
     texture.create(800, 800);
-    //modeADraw(window, square);
-    modeBDraw(window, square);
+    
+    int choice = 0;
+    if (choice == 0)
+    {
+        modeADraw(window, square);
+    }
+    else
+    {
+        modeBDraw(window, square);
+    }
+    
     
 
     //window.display();
