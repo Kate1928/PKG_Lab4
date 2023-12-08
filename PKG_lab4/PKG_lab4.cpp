@@ -7,544 +7,531 @@
 #include <vector>
 #include <math.h>
 
+#include "Container.h"
 
 using namespace std;
 using namespace sf;
 
-struct point
-{
-    int x;
-    int y;
-};
 
-struct ARGB
-{
-    BYTE a;
-    BYTE r;
-    BYTE g;
-    BYTE b;
-};
+vector <Container> containerVect;
+Container container;
 
-vector <vector<point>> shapes;
-vector <vector<point>> pointAllVisible;
-vector <vector<point>> pointAllUnvisible;
-vector<point> zPointAll;
-vector<ARGB> colorFill;
-vector<ARGB> colorOutline;
-
-void shapesInit(vector<vector<point>>& shapes, vector<point>& zPointAll, vector<ARGB>& colorFill, vector<ARGB>& colorOutline)
+void shapesInit()
 {
-    vector <point> shape1;
-    point p;
-    ARGB color;
+    Container container;
+    Container::point p;
+    Container::ARGB color;
     //-----------------------------0-------------------------
     p.x = 50;
     p.y = 25;
-    shape1.push_back(p);
+    container.shape.push_back(p);
     p.x = 450;
     p.y = 25;
-    shape1.push_back(p);
+    container.shape.push_back(p);
     p.x = 450;
     p.y = 120;
-    shape1.push_back(p);
+    container.shape.push_back(p);
     p.x = 50;
     p.y = 120;
-    shape1.push_back(p);
+    container.shape.push_back(p);
     
-    shapes.push_back(shape1);
     //затравочная точка
-    p.x = 42;
-    p.y = 42;
-    zPointAll.push_back(p);
+    container.zPoint.x = 42;
+    container.zPoint.y = 42;
+
     //color
-    color.a = 0;
-    color.r = 0;
-    color.g = 0;
-    color.b = 0;
-    colorFill.push_back(color);
-    colorOutline.push_back(color);
+   
+    container.colorFill.a = 0;
+    container.colorFill.r = 0;
+    container.colorFill.g = 0;
+    container.colorFill.b = 0;
+    container.colorOutline.a = 0;
+    container.colorOutline.r = 0;
+    container.colorOutline.g = 0;
+    container.colorOutline.b = 0;
+    containerVect.push_back(container);
 
     //-----------------------------1-------------------------
-    shape1.clear();
+    container.shape.clear();
     p.x = 303;
     p.y = 35;
-    shape1.push_back(p);
+    container.shape.push_back(p);
     p.x = 310;
     p.y = 35;
-    shape1.push_back(p);
+    container.shape.push_back(p);
     p.x = 310;
     p.y = 63;
-    shape1.push_back(p);
-    shapes.push_back(shape1);
+    container.shape.push_back(p);
     //затравочная точка
-    p.x = 306;
-    p.y = 38;
-    zPointAll.push_back(p);
+    container.zPoint.x = 306;
+    container.zPoint.y = 38;
     //color
-    color.a = 255;
-    color.r = 0;
-    color.g = 0;
-    color.b = 0;
-    colorFill.push_back(color);
-    colorOutline.push_back(color);
-
+    container.colorFill.a = 255;
+    container.colorFill.r = 0;
+    container.colorFill.g = 0;
+    container.colorFill.b = 0;
+    container.colorOutline.a = 255;
+    container.colorOutline.r = 0;
+    container.colorOutline.g = 0;
+    container.colorOutline.b = 0;
+    containerVect.push_back(container);
     //-----------------------------2-------------------------
-    shape1.clear();
+    container.shape.clear();
     p.x = 319;
     p.y = 34;
-    shape1.push_back(p);
+    container.shape.push_back(p);
     p.x = 326;
     p.y = 34;
-    shape1.push_back(p);
+    container.shape.push_back(p);
     p.x = 319;
     p.y = 63;
-    shape1.push_back(p);
-    shapes.push_back(shape1);
+    container.shape.push_back(p);
     //затравочная точка
-    p.x = 323;
-    p.y = 36;
-    zPointAll.push_back(p);
+    container.zPoint.x = 323;
+    container.zPoint.y = 36;
     //color
-    color.a = 255;
-    color.r = 0;
-    color.g = 0;
-    color.b = 0;
-    colorOutline.push_back(color);
-    colorFill.push_back(color);
+    container.colorFill.a = 255;
+    container.colorFill.r = 0;
+    container.colorFill.g = 0;
+    container.colorFill.b = 0;
+    container.colorOutline.a = 255;
+    container.colorOutline.r = 0;
+    container.colorOutline.g = 0;
+    container.colorOutline.b = 0;
+    containerVect.push_back(container);
     //-----------------------------3-------------------------
-    shape1.clear();
+    container.shape.clear();
     p.x = 282;
     p.y = 54;
-    shape1.push_back(p);
+    container.shape.push_back(p);
     p.x = 294;
     p.y = 47;
-    shape1.push_back(p);
+    container.shape.push_back(p);
     p.x = 296;
     p.y = 64;
-    shape1.push_back(p);
-    shapes.push_back(shape1);
+    container.shape.push_back(p);
     //затравочная точка
-    p.x = 292;
-    p.y = 53;
-    zPointAll.push_back(p);
+    container.zPoint.x = 292;
+    container.zPoint.y = 53;
     //color
     color.a = 255;
     color.r = 0;
     color.g = 0;
     color.b = 0;
-    colorOutline.push_back(color);
+    container.colorOutline = color;
     color.a = 255;
     color.r = 197;
     color.g = 90;
     color.b = 17;
-    colorFill.push_back(color);
+    container.colorFill = color;
+    containerVect.push_back(container);
     //-----------------------------4-------------------------
-    shape1.clear();
+    container.shape.clear();
     p.x = 336;
     p.y = 46;
-    shape1.push_back(p);
+    container.shape.push_back(p);
     p.x = 346;
     p.y = 55;
-    shape1.push_back(p);
+    container.shape.push_back(p);
     p.x = 329;
     p.y = 62;
-    shape1.push_back(p);
-    shapes.push_back(shape1);
+    container.shape.push_back(p);
     //затравочная точка
-    p.x = 334;
-    p.y = 57;
-    zPointAll.push_back(p);
+    container.zPoint.x = 334;
+    container.zPoint.y = 57;
     //color
     color.a = 255;
     color.r = 0;
     color.g = 0;
     color.b = 0;
-    colorOutline.push_back(color);
+    container.colorOutline = color;
     color.a = 255;
     color.r = 197;
     color.g = 90;
     color.b = 17;
-    colorFill.push_back(color);
+    container.colorFill = color;
+    containerVect.push_back(container);
     //-----------------------------5-------------------------
-    shape1.clear();
+    container.shape.clear();
     p.x = 287;
     p.y = 72;
-    shape1.push_back(p);
+    container.shape.push_back(p);
     p.x = 313;
     p.y = 53;
-    shape1.push_back(p);
+    container.shape.push_back(p);
     p.x = 313;
     p.y = 91;
-    shape1.push_back(p);
-    shapes.push_back(shape1);
+    container.shape.push_back(p);
     //затравочная точка
     p.x = 300;
     p.y = 70;
-    zPointAll.push_back(p);
+    container.zPoint = p;
     //color
     color.a = 255;
     color.r = 0;
     color.g = 0;
     color.b = 0;
-    colorOutline.push_back(color);
+    container.colorOutline = color;
     color.a = 255;
     color.r = 197;
     color.g = 90;
     color.b = 17;
-    colorFill.push_back(color);
+    container.colorFill = color;
+    containerVect.push_back(container);
     //-----------------------------6-------------------------
-    shape1.clear();
+    container.shape.clear();
+    p.x = 287;
     p.x = 314;
     p.y = 53;
-    shape1.push_back(p);
+    container.shape.push_back(p);
     p.x = 341;
     p.y = 72;
-    shape1.push_back(p);
+    container.shape.push_back(p);
     p.x = 314;
     p.y = 91;
-    shape1.push_back(p);
-    shapes.push_back(shape1);
+    container.shape.push_back(p);
     //затравочная точка
     p.x = 320;
     p.y = 70;
-    zPointAll.push_back(p);
+    container.zPoint = p;
     //color
     color.a = 255;
     color.r = 0;
     color.g = 0;
     color.b = 0;
-    colorOutline.push_back(color);
+    container.colorOutline = color;
     color.a = 255;
     color.r = 197;
     color.g = 90;
     color.b = 17;
-    colorFill.push_back(color);
+    container.colorFill = color;
+    containerVect.push_back(container);
     //-----------------------------7-------------------------
-    shape1.clear();
+    container.shape.clear();
     p.x = 290;
     p.y = 97;
-    shape1.push_back(p);
+    container.shape.push_back(p);
     p.x = 298;
     p.y = 83;
-    shape1.push_back(p);
+    container.shape.push_back(p);
     p.x = 298;
     p.y = 100;
-    shape1.push_back(p);
-    shapes.push_back(shape1);
+    container.shape.push_back(p);
     //затравочная точка
     p.x = 295;
     p.y = 95;
-    zPointAll.push_back(p);
+    container.zPoint = p;
     //color
     color.a = 255;
     color.r = 0;
     color.g = 0;
     color.b = 0;
-    colorOutline.push_back(color);
+    container.colorOutline = color;
     color.a = 255;
     color.r = 197;
     color.g = 90;
     color.b = 17;
-    colorFill.push_back(color);
+    container.colorFill = color;
+    containerVect.push_back(container);
     //-----------------------------8-------------------------
-    shape1.clear();
+    container.shape.clear();
     p.x = 303;
     p.y = 104;
-    shape1.push_back(p);
+    container.shape.push_back(p);
     p.x = 308;
     p.y = 88;
-    shape1.push_back(p);
+    container.shape.push_back(p);
     p.x = 312;
     p.y = 105;
-    shape1.push_back(p);
-    shapes.push_back(shape1);
+    container.shape.push_back(p);
     //затравочная точка
     p.x = 308;
     p.y = 101;
-    zPointAll.push_back(p);
+    container.zPoint = p;
     //color
     color.a = 255;
     color.r = 0;
     color.g = 0;
     color.b = 0;
-    colorOutline.push_back(color);
+    container.colorOutline = color;
     color.a = 255;
     color.r = 197;
     color.g = 90;
     color.b = 17;
-    colorFill.push_back(color);
+    container.colorFill = color;
+    containerVect.push_back(container);
     //-----------------------------9-------------------------
-    shape1.clear();
+    container.shape.clear();
     p.x = 316;
     p.y = 104;
-    shape1.push_back(p);
+    container.shape.push_back(p);
     p.x = 320;
     p.y = 89;
-    shape1.push_back(p);
+    container.shape.push_back(p);
     p.x = 325;
     p.y = 104;
-    shape1.push_back(p);
-    shapes.push_back(shape1);
+    container.shape.push_back(p);
     //затравочная точка
     p.x = 321;
     p.y = 100;
-    zPointAll.push_back(p);
+    container.zPoint = p;
     //color
     color.a = 255;
     color.r = 0;
     color.g = 0;
     color.b = 0;
-    colorOutline.push_back(color);
+    container.colorOutline = color;
     color.a = 255;
     color.r = 197;
     color.g = 90;
     color.b = 17;
-    colorFill.push_back(color);
+    container.colorFill = color;
+    containerVect.push_back(container);
     //-----------------------------10-------------------------
-    shape1.clear();
+    container.shape.clear();
     p.x = 333;
     p.y = 100;
-    shape1.push_back(p);
+    container.shape.push_back(p);
     p.x = 329;
     p.y = 83;
-    shape1.push_back(p);
+    container.shape.push_back(p);
     p.x = 341;
     p.y = 95;
-    shape1.push_back(p);
-    shapes.push_back(shape1);
+    container.shape.push_back(p);
     //затравочная точка
     p.x = 334;
     p.y = 94;
-    zPointAll.push_back(p);
+    container.zPoint = p;
     //color
     color.a = 255;
     color.r = 0;
     color.g = 0;
     color.b = 0;
-    colorOutline.push_back(color);
+    container.colorOutline = color;
     color.a = 255;
     color.r = 197;
     color.g = 90;
     color.b = 17;
-    colorFill.push_back(color);
+    container.colorFill = color;
+    containerVect.push_back(container);
     //-----------------------------11-------------------------
-    shape1.clear();
+    container.shape.clear();
     p.x = 270;
     p.y = 58;
-    shape1.push_back(p);
+    container.shape.push_back(p);
     p.x = 270;
     p.y = 42;
-    shape1.push_back(p);
+    container.shape.push_back(p);
     p.x = 291;
     p.y = 58;
-    shape1.push_back(p);
-    shapes.push_back(shape1);
+    container.shape.push_back(p);
     //затравочная точка
     p.x = 274;
     p.y = 49;
-    zPointAll.push_back(p);
+    container.zPoint = p;
     //color
     color.a = 255;
     color.r = 0;
     color.g = 0;
     color.b = 0;
-    colorOutline.push_back(color);
+    container.colorOutline = color;
     color.a = 255;
     color.r = 197;
     color.g = 90;
     color.b = 17;
-    colorFill.push_back(color);
+    container.colorFill = color;
+    containerVect.push_back(container);
     //-----------------------------12-------------------------
-    shape1.clear();
+    container.shape.clear();
     p.x = 282;
     p.y = 30;
-    shape1.push_back(p);
+    container.shape.push_back(p);
     p.x = 297;
     p.y = 34;
-    shape1.push_back(p);
+    container.shape.push_back(p);
     p.x = 291;
     p.y = 54;
-    shape1.push_back(p);
-    shapes.push_back(shape1);
+    container.shape.push_back(p);
     //затравочная точка
     p.x = 291;
     p.y = 43;
-    zPointAll.push_back(p);
+    container.zPoint = p;
     //color
     color.a = 255;
     color.r = 0;
     color.g = 0;
     color.b = 0;
-    colorOutline.push_back(color);
+    container.colorOutline = color;
     color.a = 255;
     color.r = 197;
     color.g = 90;
     color.b = 17;
-    colorFill.push_back(color);
+    container.colorFill = color;
+    containerVect.push_back(container);
     //-----------------------------13-------------------------
-    shape1.clear();
+    container.shape.clear();
     p.x = 333;
     p.y = 33;
-    shape1.push_back(p);
+    container.shape.push_back(p);
     p.x = 348;
     p.y = 29;
-    shape1.push_back(p);
+    container.shape.push_back(p);
     p.x = 339;
     p.y = 54;
-    shape1.push_back(p);
-    shapes.push_back(shape1);
+    container.shape.push_back(p);
     //затравочная точка
     p.x = 339;
     p.y = 42;
-    zPointAll.push_back(p);
+    container.zPoint = p;
     //color
     color.a = 255;
     color.r = 0;
     color.g = 0;
     color.b = 0;
-    colorOutline.push_back(color);
+    container.colorOutline = color;
     color.a = 255;
     color.r = 197;
     color.g = 90;
     color.b = 17;
-    colorFill.push_back(color);
+    container.colorFill = color;
+    containerVect.push_back(container);
     //-----------------------------14-------------------------
-    shape1.clear();
+    container.shape.clear();
     p.x = 362;
     p.y = 38;
-    shape1.push_back(p);
+    container.shape.push_back(p);
     p.x = 362;
     p.y = 54;
-    shape1.push_back(p);
+    container.shape.push_back(p);
     p.x = 340;
     p.y = 54;
-    shape1.push_back(p);
-    shapes.push_back(shape1);
+    container.shape.push_back(p);
     //затравочная точка
     p.x = 350;
     p.y = 50;
-    zPointAll.push_back(p);
+    container.zPoint = p;
     //color
     color.a = 255;
     color.r = 0;
     color.g = 0;
     color.b = 0;
-    colorOutline.push_back(color);
+    container.colorOutline = color;
     color.a = 255;
     color.r = 197;
     color.g = 90;
     color.b = 17;
-    colorFill.push_back(color);
+    container.colorFill = color;
+    containerVect.push_back(container);
     //mountine
     //-----------------------------1-------------------------
-    shape1.clear();
+    container.shape.clear();
     p.x = 115;
     p.y = 130;
-    shape1.push_back(p);
+    container.shape.push_back(p);
     p.x = 275;
     p.y = 65;
-    shape1.push_back(p);
+    container.shape.push_back(p);
     p.x = 430;
     p.y = 130;
-    shape1.push_back(p);
-    shapes.push_back(shape1);
+    container.shape.push_back(p);
     //затравочная точка
     p.x = 260;
     p.y = 100;
-    zPointAll.push_back(p);
+    container.zPoint = p;
     //color
     color.a = 255;
     color.r = 0;
     color.g = 0;
     color.b = 0;
-    colorOutline.push_back(color);
+    container.colorOutline = color;
     color.a = 255;
     color.r = 255;
     color.g = 192;
     color.b = 0;
-    colorFill.push_back(color);
+    container.colorFill = color;
+    containerVect.push_back(container);
     
     //--------------------------------------2---------------------------------
-    shape1.clear();
+    container.shape.clear();
     p.x = 10;
     p.y = 130;
-    shape1.push_back(p);
+    container.shape.push_back(p);
     p.x = 170;
     p.y = 55;
-    shape1.push_back(p);
+    container.shape.push_back(p);
     p.x = 320;
     p.y = 130;
-    shape1.push_back(p);
-    shapes.push_back(shape1);
+    container.shape.push_back(p);
     //затравочная точка
     p.x = 100;
     p.y = 100;
-    zPointAll.push_back(p);
+    container.zPoint = p;
     //color
     color.a = 255;
     color.r = 0;
     color.g = 0;
     color.b = 0;
-    colorOutline.push_back(color);
+    container.colorOutline = color;
     color.a = 255;
     color.r = 255;
     color.g = 192;
     color.b = 0;
-    colorFill.push_back(color);
+    container.colorFill = color;
+    containerVect.push_back(container);
     //---------------------------------3-----------------------------
-    shape1.clear();
+    container.shape.clear();
     p.x = 230;
     p.y = 130;
-    shape1.push_back(p);
+    container.shape.push_back(p);
     p.x = 390;
     p.y = 25;
-    shape1.push_back(p);
+    container.shape.push_back(p);
     p.x = 550;
     p.y = 130;
-    shape1.push_back(p);
-    shapes.push_back(shape1);
+    container.shape.push_back(p);
     //затравочная точка
     p.x = 520;
     p.y = 120;
-    zPointAll.push_back(p);
+    container.zPoint = p;
     //color
     color.a = 255;
     color.r = 0;
     color.g = 0;
     color.b = 0;
-    colorOutline.push_back(color);
+    container.colorOutline = color;
     color.a = 255;
     color.r = 255;
     color.g = 192;
     color.b = 0;
-    colorFill.push_back(color);
+    container.colorFill = color;
+    containerVect.push_back(container);
     //--------------------------------4--------------------------
-    shape1.clear();
+    container.shape.clear();
     p.x = 125;
     p.y = 130;
-    shape1.push_back(p);
+    container.shape.push_back(p);
     p.x = 282;
     p.y = 10;
-    shape1.push_back(p);
+    container.shape.push_back(p);
     p.x = 439;
     p.y = 130;
-    shape1.push_back(p);
-    shapes.push_back(shape1);
+    container.shape.push_back(p);
     //затравочная точка
     p.x = 255;
     p.y = 50;
-    zPointAll.push_back(p);
+    container.zPoint = p;
     //color
     color.a = 255;
     color.r = 0;
     color.g = 0;
     color.b = 0;
-    colorOutline.push_back(color);
+    container.colorOutline = color;
     color.a = 255;
     color.r = 255;
     color.g = 192;
     color.b = 0;
-    colorFill.push_back(color);
+    container.colorFill = color;
+    containerVect.push_back(container);
 }
 
 void brezenham(int x1, int x2, int y1, int y2, Color color, RenderWindow& window, RectangleShape& square)
@@ -585,12 +572,11 @@ Image image;
 
 void areaB(int xz, int yz, Color color, Color colorOutline, RenderWindow& window, RectangleShape& square)
 {
-    stack <point> stack;
-    point p;
+    stack <Container::point> stack;
+    Container::point p;
     p.x = xz;
     p.y = yz;
     stack.push(p);
-    //auto color2 = GetPixel(hdc, 1, 1);
     square.setFillColor(color);
     
     while (!stack.empty())
@@ -598,13 +584,11 @@ void areaB(int xz, int yz, Color color, Color colorOutline, RenderWindow& window
         p = stack.top();
         stack.pop();
         
-        
         int x = p.x;
         int y = p.y;
         texture.update(window);
         Sprite sprite;
         sprite.setTexture(texture);
-        //sprite.setOrigin(sf::Vector2f(-500, -500));
         
         image = texture.copyToImage();
         window.display();
@@ -612,16 +596,18 @@ void areaB(int xz, int yz, Color color, Color colorOutline, RenderWindow& window
         window.clear();
         window.draw(sprite);
         Color color2;
-        //color2 = image.getPixel(x + 1, y);
-        if (image.getPixel(x + 1, y) != color && image.getPixel(x + 1, y) != colorOutline)
+        color2.a = 255;
+        color2.r = 5;
+        color2.g = 255;
+        color2.b = 5;
+        if (image.getPixel(x + 1, y) != color && image.getPixel(x + 1, y) != colorOutline && image.getPixel(x + 1, y) != color2)
         {
             p.x = x + 1;
             square.setPosition(p.x, p.y);
             window.draw(square);
             stack.push(p);
         }
-        //color2 = image.getPixel(x - 1, y);
-        if (image.getPixel(x - 1, y) != color && image.getPixel(x - 1, y) != colorOutline)
+        if (image.getPixel(x - 1, y) != color && image.getPixel(x - 1, y) != colorOutline && image.getPixel(x - 1, y) != color2)
         {
             p.x = x - 1;
             square.setPosition(p.x, p.y);
@@ -630,16 +616,14 @@ void areaB(int xz, int yz, Color color, Color colorOutline, RenderWindow& window
             stack.push(p);
         }
         p.x = x;
-        //color2 = image.getPixel(x, y + 20);
-        if (image.getPixel(x, y + 1) != color && image.getPixel(x, y + 1) != colorOutline)
+        if (image.getPixel(x, y + 1) != color && image.getPixel(x, y + 1) != colorOutline && image.getPixel(x, y + 1) != color2)
         {
             p.y = y + 1;
             square.setPosition(p.x, p.y);
             window.draw(square);
             stack.push(p);
         }
-        //color2 = image.getPixel(x, y - 1);
-        if (image.getPixel(x, y - 1) != color && image.getPixel(x, y - 1) != colorOutline)
+        if (image.getPixel(x, y - 1) != color && image.getPixel(x, y - 1) != colorOutline && image.getPixel(x, y - 1) != color2)
         {
             p.y = y - 1;
             square.setPosition(p.x, p.y);
@@ -650,8 +634,9 @@ void areaB(int xz, int yz, Color color, Color colorOutline, RenderWindow& window
     }
 }
 
-bool pointBelong(vector<point> shape, int x0, int y0)
+bool pointBelong(vector<Container::point> shape, int x0, int y0)
 {
+    
     int a = (shape[0].x - x0) * (shape[1].y - shape[0].y) - (shape[1].x - shape[0].x) * (shape[0].y - y0);
     int b = (shape[1].x - x0) * (shape[2].y - shape[1].y) - (shape[2].x - shape[1].x) * (shape[1].y - y0); 
     int c = (shape[2].x - x0) * (shape[0].y - shape[2].y) - (shape[0].x - shape[2].x) * (shape[2].y - y0); 
@@ -663,30 +648,25 @@ bool pointBelong(vector<point> shape, int x0, int y0)
     {
         return false;
     }
-   
 }
-
-vector<point> pointVisible;
-vector<point> pointUnvisible;
-point crossPoint;
 
 bool intersection_lineseg(int x1, int y1, int x2, int y2, int xa, int ya, int xb, int yb)
 {
-    crossPoint.x = -1;
-    crossPoint.y = -1;
+    container.crossPoint.x = -1;
+    container.crossPoint.y = -1;
     if (x2 == x1 && xb == xa)
         return false;
     else if (x2 == x1)
     {
         float m2 = (float)(yb - ya) / (float)(xb - xa);
-        crossPoint.x = x1;
-        crossPoint.y = ya - m2 * (xa - x1);
+        container.crossPoint.x = x1;
+        container.crossPoint.y = ya - m2 * (xa - x1);
     }
     else if (xb == xa)
     {
         float m1 = (float)(y2 - y1) / (float)(x2 - x1);
-        crossPoint.x = xa;
-        crossPoint.y = y1 + m1 * (xa - x1);
+        container.crossPoint.x = xa;
+        container.crossPoint.y = y1 + m1 * (xa - x1);
     }
     else
     {
@@ -694,18 +674,16 @@ bool intersection_lineseg(int x1, int y1, int x2, int y2, int xa, int ya, int xb
         float m2 = (float)(yb - ya) / (float)(xb - xa);
         if (m1 == m2)
             return false;
-        crossPoint.x = (ya - y1 + m1 * x1 - m2 * xa) / (m1 - m2);
-        crossPoint.y = (m1 * m2 * (xa - x1) + m2 * y1 - m1 * ya) / (m2 - m1);
+        container.crossPoint.x = (ya - y1 + m1 * x1 - m2 * xa) / (m1 - m2);
+        container.crossPoint.y = (m1 * m2 * (xa - x1) + m2 * y1 - m1 * ya) / (m2 - m1);
     }
 
-    if ((x1 >= x2 && (crossPoint.x<x2 || crossPoint.x>x1)) || (x2 >= x1 && (crossPoint.x > x2 || crossPoint.x < x1)) || (y1 >= y2 && (crossPoint.y<y2 || crossPoint.y>y1)) || (y2 >= y1 && (crossPoint.y > y2 || crossPoint.y < y1))
-        || (xa >= xb && (crossPoint.x<xb || crossPoint.x>xa)) || (xb >= xa && (crossPoint.x > xb || crossPoint.x < xa)) || (ya >= yb && (crossPoint.y<yb || crossPoint.y>ya)) || (yb >= ya && (crossPoint.y > yb || crossPoint.y < ya)))
+    if ((x1 >= x2 && (container.crossPoint.x<x2 || container.crossPoint.x>x1)) || (x2 >= x1 && (container.crossPoint.x > x2 || container.crossPoint.x < x1)) || (y1 >= y2 && (container.crossPoint.y<y2 || container.crossPoint.y>y1)) || (y2 >= y1 && (container.crossPoint.y > y2 || container.crossPoint.y < y1))
+        || (xa >= xb && (container.crossPoint.x<xb || container.crossPoint.x>xa)) || (xb >= xa && (container.crossPoint.x > xb || container.crossPoint.x < xa)) || (ya >= yb && (container.crossPoint.y<yb || container.crossPoint.y>ya)) || (yb >= ya && (container.crossPoint.y > yb || container.crossPoint.y < ya)))
     {
-        /*crossPoint.x = -1;
-        crossPoint.y = -1;*/
         return false;
     }
-    if ((crossPoint.x == x1 && crossPoint.y == y1) || (crossPoint.x == x2 && crossPoint.y == y2))
+    if ((container.crossPoint.x == x1 && container.crossPoint.y == y1) || (container.crossPoint.x == x2 && container.crossPoint.y == y2))
     {
         return false;
     }
@@ -713,11 +691,11 @@ bool intersection_lineseg(int x1, int y1, int x2, int y2, int xa, int ya, int xb
 }
 
 
-void sutherlandHodgman(vector<point> shape, int x1, int y1, int x2, int y2)
+void sutherlandHodgman(vector<Container::point> shape, int x1, int y1, int x2, int y2)
 {
     bool a1 = pointBelong(shape, x1, y1);
     bool a2 = pointBelong(shape, x2, y2);
-    point p;
+    Container::point p;
     int pointCount;
     
     if (a1 == false && a2 == false)
@@ -729,156 +707,125 @@ void sutherlandHodgman(vector<point> shape, int x1, int y1, int x2, int y2)
     {
         p.x = x2;
         p.y = y2;
-        pointUnvisible.push_back(p);
+        container.pointUnvisible.push_back(p);
     }
 
     if (a1 == false && a2 == true)
     {
         
-        for (int i = 0; i < 2; i++)
+        for (int i = 0; i < shape.size() - 1; i++)
         {
             if (intersection_lineseg(x1, y1, x2, y2, shape[i].x, shape[i].y, shape[i + 1].x, shape[i + 1].y) )
             {
-                pointUnvisible.push_back(crossPoint);
+                container.pointUnvisible.push_back(container.crossPoint);
                 
             }
         }
-        if (intersection_lineseg(x1, y1, x2, y2, shape[2].x, shape[2].y, shape[0].x, shape[0].y))
+        int i  = shape.size() - 1;
+        if (intersection_lineseg(x1, y1, x2, y2, shape[i].x, shape[i].y, shape[0].x, shape[0].y))
         {
-            pointUnvisible.push_back(crossPoint);
+            container.pointUnvisible.push_back(container.crossPoint);
         }
         p.x = x2;
         p.y = y2;
-        pointUnvisible.push_back(p);
+        container.pointUnvisible.push_back(p);
     }
     if (a1 == true && a2 == false)
     {
-
-        if (intersection_lineseg(x1, y1, x2, y2, shape[0].x, shape[0].y, shape[1].x, shape[1].y))
+        for (int i = 0; i < shape.size() - 1; i++)
         {
-            pointUnvisible.push_back(crossPoint);
+            if (intersection_lineseg(x1, y1, x2, y2, shape[i].x, shape[i].y, shape[i + 1].x, shape[i + 1].y))
+            {
+                container.pointUnvisible.push_back(container.crossPoint);
+            }
         }
-        if (intersection_lineseg(x1, y1, x2, y2, shape[1].x, shape[1].y, shape[2].x, shape[2].y))
+        int i = shape.size() - 1;
+        if (intersection_lineseg(x1, y1, x2, y2, shape[i].x, shape[i].y, shape[0].x, shape[0].y))
         {
-            pointUnvisible.push_back(crossPoint);
-        }
-        if (intersection_lineseg(x1, y1, x2, y2, shape[2].x, shape[2].y, shape[0].x, shape[0].y))
-        {
-            pointUnvisible.push_back(crossPoint);
+            container.pointUnvisible.push_back(container.crossPoint);
         }
     }
 
 }
 
-void sutherlandHodgmanVisible(vector<point> shape, int x1, int y1, int x2, int y2)
+void sutherlandHodgmanVisible(vector<Container::point> shape, int x1, int y1, int x2, int y2)
 {
     bool a1 = pointBelong(shape, x1, y1);
     bool a2 = pointBelong(shape, x2, y2);
     bool t = false;
-    point p;
+    Container::point p;
     int pointCount;
 
     if (a1 == false && a2 == false)
     {
         p.x = x2;
         p.y = y2;
-        pointVisible.push_back(p);
+        container.pointVisible.push_back(p);
         //pointCount++;
     }
 
     if (a1 == true && a2 == true)
     {
-       /* p.x = x2;
-        p.y = y2;
-        pointUnvisible.push_back(p);*/
-        //pointVisible.push_back(p);
+       
     }
 
     if (a1 == false && a2 == true)
     {
 
-        for (int i = 0; i < 2; i++)
+        for (int i = 0; i < shape.size() - 1; i++)
         {
             if (intersection_lineseg(x1, y1, x2, y2, shape[i].x, shape[i].y, shape[i + 1].x, shape[i + 1].y) && t == false)
             {
-                //pointUnvisible.push_back(crossPoint);
-                pointVisible.push_back(crossPoint);
+                container.pointVisible.push_back(container.crossPoint);
                 t = true;
             }
         }
-        if (intersection_lineseg(x1, y1, x2, y2, shape[2].x, shape[2].y, shape[0].x, shape[0].y) && t == false)
+        int i = shape.size() - 1;
+        if (intersection_lineseg(x1, y1, x2, y2, shape[i].x, shape[i].y, shape[0].x, shape[0].y) && t == false)
         {
-            //pointUnvisible.push_back(crossPoint);
-            pointVisible.push_back(crossPoint);
+            container.pointVisible.push_back(container.crossPoint);
             t = true;
         }
-        /*p.x = x2;
-        p.y = y2;
-        pointUnvisible.push_back(p);*/
     }
     if (a1 == true && a2 == false)
     {
 
-        if (intersection_lineseg(x1, y1, x2, y2, shape[0].x, shape[0].y, shape[1].x, shape[1].y) && t == false)
+        for (int i = 0; i < shape.size() - 1; i++)
         {
-            //pointUnvisible.push_back(crossPoint);
-            pointVisible.push_back(crossPoint);
-            t = true;
+            if (intersection_lineseg(x1, y1, x2, y2, shape[i].x, shape[i].y, shape[i + 1].x, shape[i + 1].y) && t == false)
+            {
+                container.pointVisible.push_back(container.crossPoint);
+                t = true;
+            }
         }
-        if (intersection_lineseg(x1, y1, x2, y2, shape[1].x, shape[1].y, shape[2].x, shape[2].y) && t == false)
+        int i = shape.size() - 1;
+        if (intersection_lineseg(x1, y1, x2, y2, shape[i].x, shape[i].y, shape[0].x, shape[0].y) && t == false)
         {
-            //pointUnvisible.push_back(crossPoint);
-            pointVisible.push_back(crossPoint);
-            t = true;
-        }
-        if (intersection_lineseg(x1, y1, x2, y2, shape[2].x, shape[2].y, shape[0].x, shape[0].y) && t == false)
-        {
-            //pointUnvisible.push_back(crossPoint);
-            pointVisible.push_back(crossPoint);
+            container.pointVisible.push_back(container.crossPoint);
             t = true;
         }
         p.x = x2;
         p.y = y2;
-        pointVisible.push_back(p);
+        container.pointVisible.push_back(p);
     }
     t = false;
 
 }
 
-//vector <vector<point>> pointA;
-//vector <vector<point>> pointC;
-//vector<point> pointZ;
-
-
-// Defining region codes
-const int INSIDE = 0; // 0000
-const int LEFT = 1; // 0001
-const int RIGHT = 2; // 0010
-const int BOTTOM = 4; // 0100
-const int TOP = 8; // 1000
-
-// Defining x_max, y_max and x_min, y_min for
-// clipping rectangle. Since diagonal points are
-// enough to define a rectangle
-const int x_max = 450;
-const int y_max = 120;
-const int x_min = 50;
-const int y_min = 25;
-
 // Function to compute region code for a point(x, y)
 int computeCode(double x, double y)
 {
     // initialized as being inside
-    int code = INSIDE;
+    int code = container.INSIDE;
 
-    if (x < x_min) // to the left of rectangle
-        code |= LEFT;
-    else if (x > x_max) // to the right of rectangle
-        code |= RIGHT;
-    if (y < y_min) // below the rectangle
-        code |= BOTTOM;
-    else if (y > y_max) // above the rectangle
-        code |= TOP;
+    if (x < containerVect[0].shape[0].x) // to the left of rectangle
+        code |= container.LEFT;
+    else if (x > containerVect[0].shape[2].x) // to the right of rectangle
+        code |= container.RIGHT;
+    if (y < containerVect[0].shape[0].y) // below the rectangle
+        code |= container.BOTTOM;
+    else if (y > containerVect[0].shape[2].y) // above the rectangle
+        code |= container.TOP;
 
     return code;
 }
@@ -886,14 +833,17 @@ int computeCode(double x, double y)
 
 // Implementing Cohen-Sutherland algorithm
 // Clipping a line from P1 = (x1, y1) to P2 = (x2, y2)
-void сohenSutherland(int x1, int y1, int x2, int y2, vector<point> shape)
+void сohenSutherland(int x1, int y1, int x2, int y2, vector<Container::point> shape,int x_min, int y_min, int x_max, int y_max)
 {
     // Вычислить коды регионов для P1, P2
     int code1 = computeCode(x1, y1);
     int code2 = computeCode(x2, y2);
-    point p, p1;
+    Container::point p, p1;
     bool t = false;
-
+    int xStart = x1;
+    int yStart = y1;
+    int xEnd = x2;
+    int yEnd = y2;
 
     // Инициализировать строку вне прямоугольного окна
     bool accept = false;
@@ -903,14 +853,17 @@ void сohenSutherland(int x1, int y1, int x2, int y2, vector<point> shape)
             // Если обе конечные точки лежат внутри прямоугольника
             p.x = x2;
             p.y = y2;
-            pointVisible.push_back(p);
+            container.pointVisible.push_back(p);
             if (t)
-                pointVisible.push_back(p1);
+                container.pointVisible.push_back(p1);
             accept = true;
             break;
         }
         else if (code1 & code2) {
             // Если обе конечные точки находятся за пределами прямоугольника, в одном регионе
+            p.x = x2;
+            p.y = y2;
+            container.pointUnvisible.push_back(p);
             break;
         }
         else {
@@ -927,22 +880,22 @@ void сohenSutherland(int x1, int y1, int x2, int y2, vector<point> shape)
             // Найти точку пересечения;
             // y = y1 + slope * (x - x1),
             // x = x1 + (1 / slope) * (y - y1)
-            if (code_out & TOP) {
+            if (code_out & container.TOP) {
                 // точка находится над прямоугольником обрезки
                 x = x1 + (x2 - x1) * (y_max - y1) / (y2 - y1);
                 y = y_max;
             }
-            else if (code_out & BOTTOM) {
+            else if (code_out & container.BOTTOM) {
                 // точка находится под прямоугольником
                 x = x1 + (x2 - x1) * (y_min - y1) / (y2 - y1);
                 y = y_min;
             }
-            else if (code_out & RIGHT) {
+            else if (code_out & container.RIGHT) {
                 // точка находится справа от прямоугольника
                 y = y1 + (y2 - y1) * (x_max - x1) / (x2 - x1);
                 x = x_max;
             }
-            else if (code_out & LEFT) {
+            else if (code_out & container.LEFT) {
                 // точка находится слева от прямоугольника
                 y = y1 + (y2 - y1) * (x_min - x1) / (x2 - x1);
                 x = x_min;
@@ -956,10 +909,44 @@ void сohenSutherland(int x1, int y1, int x2, int y2, vector<point> shape)
                 y1 = y;
                 p.x = x;
                 p.y = y;
-                pointVisible.push_back(p);
+                container.pointVisible.push_back(p);
+                container.pointUnvisible.push_back(p);
                 code1 = computeCode(x1, y1);
+                if (pointBelong(shape, x_min, y_min))
+                {
+                    p.x = x_min;
+                    p.y = y_min;
+                    container.pointUnvisible.push_back(p);
+                }
+                if (pointBelong(shape, x_max, y_min))
+                {
+                    p.x = x_max;
+                    p.y = y_min;
+                    container.pointUnvisible.push_back(p);
+                }
+                if (pointBelong(shape, x_min, y_max))
+                {
+                    p.x = x_min;
+                    p.y = y_max;
+                    container.pointUnvisible.push_back(p);
+                }
+                if (pointBelong(shape, x_max, y_max))
+                {
+                    p.x = x_max;
+                    p.y = y_max;
+                    container.pointUnvisible.push_back(p);
+                }
             }
             else {
+                if (computeCode(x, y) == 0)
+                {
+                    p.x = x;
+                    p.y = y;
+                    container.pointUnvisible.push_back(p);
+                    p.x = xEnd;
+                    p.y = yEnd;
+                    container.pointUnvisible.push_back(p);
+                }
                 x2 = x;
                 y2 = y;
                 code2 = computeCode(x2, y2);
@@ -968,513 +955,168 @@ void сohenSutherland(int x1, int y1, int x2, int y2, vector<point> shape)
                     p1.x = x_min;
                     p1.y = y_min;
                     t = true;
-                    //pointVisible.push_back(p);
                 }
                 if (pointBelong(shape, x_max, y_min))
                 {
                     p1.x = x_max;
                     p1.y = y_min;
                     t = true;
-                    //pointVisible.push_back(p);
                 }
                 if (pointBelong(shape, x_min, y_max))
                 {
                     p1.x = x_min;
                     p1.y = y_max;
                     t = true;
-                    //pointVisible.push_back(p);
                 }
                 if (pointBelong(shape, x_max, y_max))
                 {
                     p1.x = x_max;
                     p1.y = y_max;
                     t = true;
-                    //pointVisible.push_back(p);
                 }
             }
         }
     }
 }
 
-//void сohenSutherlandUnvisible(int x1, int y1, int x2, int y2, vector<point> shape)
-//{
-//    // Вычислить коды регионов для P1, P2
-//    int code1 = computeCode(x1, y1);
-//    int code2 = computeCode(x2, y2);
-//    point p, p1;
-//    bool t = false;
-//
-//
-//    // Инициализировать строку вне прямоугольного окна
-//    bool accept = true;
-//
-//    while (true) {
-//        if (code1 & code2) {
-//            //   Если обе конечные точки находятся за пределами прямоугольника, в одном регионе 
-//            p.x = x2;
-//            p.y = y2;
-//            pointVisible.push_back(p);
-//            if (t)
-//                pointVisible.push_back(p1);
-//            accept = true;
-//            break;
-//        }
-//        else if ((code1 == 0) && (code2 == 0)) {
-//            // Если обе конечные точки лежат внутри прямоугольника
-//            break;
-//        }
-//        else {
-//            // Какой-то отрезок линии лежит внутри прямоугольника
-//            int code_in;
-//            double x, y;
-//
-//            // Хотя бы одна конечная точка находится за пределами прямоугольника, выбераем ее.
-//            if (code1 == 0)
-//                code_in = code1;
-//            else
-//                code_in = code2;
-//
-//            // Найти точку пересечения;
-//            // y = y1 + slope * (x - x1),
-//            // x = x1 + (1 / slope) * (y - y1)
-//            if (code_in & TOP) {
-//                // точка находится над прямоугольником обрезки
-//                x = x1 + (x2 - x1) * (y_max - y1) / (y2 - y1);
-//                y = y_max;
-//            }
-//            else if (code_in & BOTTOM) {
-//                // точка находится под прямоугольником
-//                x = x1 + (x2 - x1) * (y_min - y1) / (y2 - y1);
-//                y = y_min;
-//            }
-//            else if (code_in & RIGHT) {
-//                // точка находится справа от прямоугольника
-//                y = y1 + (y2 - y1) * (x_max - x1) / (x2 - x1);
-//                x = x_max;
-//            }
-//            else if (code_in & LEFT) {
-//                // точка находится слева от прямоугольника
-//                y = y1 + (y2 - y1) * (x_min - x1) / (x2 - x1);
-//                x = x_min;
-//            }
-//
-//            // Теперь точка пересечения x, y найдена.
-//            // Заменяем точку вне прямоугольника
-//            // по точке пересечения
-//            if (code_in == code1) {
-//                x1 = x;
-//                y1 = y;
-//                code1 = computeCode(x1, y1);
-//                p.x = x;
-//                p.y = y;
-//                pointUnvisible.push_back(p);
-//                
-//                
-//                if (pointBelong(shape, x_min, y_min))
-//                {
-//                    p1.x = x_min;
-//                    p1.y = y_min;
-//                    t = true;
-//                }
-//                if (pointBelong(shape, x_max, y_min))
-//                {
-//                    p1.x = x_max;
-//                    p1.y = y_min;
-//                    t = true;
-//                }
-//                if (pointBelong(shape, x_min, y_max))
-//                {
-//                    p1.x = x_min;
-//                    p1.y = y_max;
-//                    t = true;
-//                }
-//                if (pointBelong(shape, x_max, y_max))
-//                {
-//                    p1.x = x_max;
-//                    p1.y = y_max;
-//                    t = true;
-//                }              
-//            }
-//            else {
-//                
-//                x2 = x;
-//                y2 = y;
-//                code2 = computeCode(x2, y2); 
-//            }
-//        }
-//    }
-//}
-
-void modeADraw(RenderWindow& window, RectangleShape& square)
+void modeB(RenderWindow& window, RectangleShape& square)
 {
-    //--------------------------------------------------------------------sutherlandHodgman get Visible part---------------------------------------------------------------------------------------
-    int j, k;
-    for (int i = shapes.size() - 1; i > 0; i--)
-    {
-        j = i - 1;
-        while (j > 0)
-        {
-            for (int k = 0; k < shapes[i].size() - 1; k++)
-            {
-                sutherlandHodgmanVisible(shapes[j], shapes[i][k].x, shapes[i][k].y, shapes[i][k + 1].x, shapes[i][k + 1].y);
-            }
-            int k = shapes[i].size() - 1;
-            sutherlandHodgmanVisible(shapes[j], shapes[i][k].x, shapes[i][k].y, shapes[i][0].x, shapes[i][0].y);
-            shapes[i] = pointVisible;
-            pointVisible.clear();
-            j--;
-        }
-        /*
-        for (int k = 0; k < shapes[j].size() - 1; k++)
-        {
-            sutherlandHodgman(shapes[i], shapes[j][k].x, shapes[j][k].y, shapes[j][k + 1].x, shapes[j][k + 1].y);
-        }
-        int k = shapes[j].size() - 1;
-        sutherlandHodgman(shapes[i], shapes[j][k].x, shapes[j][k].y, shapes[j][0].x, shapes[j][0].y);
-        for (int l = 0; l < shapes[i].size(); l++)
-        {
-            if ((pointVisible[0].x - shapes[i][0].x) * (by - ay) == (bx - ax) * (my - ay)) {
-                if (min(ay, by) <= my && (max(ay, by) >= my) && min(ax, bx) <= mx && max(ax, bx) >= mx) {
-                    cout << "YES";
-                    return 0;
-                }
-            }
-        }
-        shapes[i] = pointVisible;
-        pointVisible.clear();*/
-        
-    }
-    //---------------------------------------------------------------------сohenSutherland-----------------------------------------------------------------------------------------
-
-    for (int i = 1; i < shapes.size(); i++)
-    {
-        for (int j = 0; j < shapes[i].size() - 1; j++)
-        {
-            сohenSutherland(shapes[i][j].x, shapes[i][j].y, shapes[i][j + 1].x , shapes[i][j + 1].y, shapes[i]);
-        }
-        int t = shapes[i].size() - 1;
-        сohenSutherland(shapes[i][t].x, shapes[i][t].y, shapes[i][0].x, shapes[i][0].y, shapes[i]);
-        pointAllVisible.push_back(pointVisible);
-        pointVisible.clear();
-    }
-
-    
-
-    //--------------------------------------------------------------------------отрисовка всего---------------------------------------------------------------------------------------------------
-    //отрисовка
-    Color color,color2;
-    /*for (int i = 1; i < shapes.size(); i++)
-    {
-        
-        color2.a = colorOutline[i].a;
-        color2.r = colorOutline[i].r;
-        color2.g = colorOutline[i].g;
-        color2.b = colorOutline[i].b;
-        for (int j = 0; j < shapes[i].size() - 1; j++)
-        {
-            brezenham(shapes[i][j].x, shapes[i][j + 1].x, shapes[i][j].y, shapes[i][j + 1].y, color2, window, square);
-        }
-        brezenham(shapes[i][shapes[i].size() - 1].x, shapes[i][0].x, shapes[i][shapes[i].size() - 1].y, shapes[i][0].y, color2, window, square);
-        
-        color.a = colorFill[i].a;
-        color.r = colorFill[i].r;
-        color.g = colorFill[i].g;
-        color.b = colorFill[i].b;
-        areaB(zPointAll[i].x, zPointAll[i].y, color, color2, window, square);
-    }
-    */
-
-    //--------------------------------------------------------------------------отрисовка сohenSutherland-----------------------------------------------------------------------------------------------------
-
-    k = pointAllVisible.size() - 1;
-    for (int i = 0; i <= k; i++)
+    int k = containerVect.size() - 1;
+    for (int i = 1; i <= k; i++)
     {
         Color color, color2;
-        color2.a = colorOutline[i + 1].a;
-        color2.r = colorOutline[i + 1].r;
-        color2.g = colorOutline[i + 1].g;
-        color2.b = colorOutline[i + 1].b;
-        for (int j = 0; j < pointAllVisible[i].size() - 1; j++)
+        color2.a = containerVect[i].colorOutline.a;
+        color2.r = containerVect[i].colorOutline.r;
+        color2.g = containerVect[i].colorOutline.g;
+        color2.b = containerVect[i].colorOutline.b;
+        for (int l = 0; l < containerVect[i].pointAllVisible.size(); l++)
         {
-            brezenham(pointAllVisible[i][j].x, pointAllVisible[i][j + 1].x, pointAllVisible[i][j].y, pointAllVisible[i][j + 1].y, color2, window, square);
+            for (int j = 0; j < containerVect[i].pointAllVisible[l].size() - 1; j++)
+            {
+                brezenham(containerVect[i].pointAllVisible[l][j].x, containerVect[i].pointAllVisible[l][j + 1].x, containerVect[i].pointAllVisible[l][j].y, containerVect[i].pointAllVisible[l][j + 1].y, color2, window, square);
+            }
+            int k2 = containerVect[i].pointAllVisible[l].size() - 1;
+            brezenham(containerVect[i].pointAllVisible[l][k2].x, containerVect[i].pointAllVisible[l][0].x, containerVect[i].pointAllVisible[l][k2].y, containerVect[i].pointAllVisible[l][0].y, color2, window, square);
         }
-        int k2 = pointAllVisible[i].size() - 1;
-        brezenham(pointAllVisible[i][k2].x, pointAllVisible[i][0].x, pointAllVisible[i][k2].y, pointAllVisible[i][0].y, color2, window, square);
         //Sleep(200);
-        color.a = colorFill[i + 1].a;
-        color.r = colorFill[i + 1].r;
-        color.g = colorFill[i + 1].g;
-        color.b = colorFill[i + 1].b;
+        color.a = containerVect[i].colorFill.a;
+        color.r = containerVect[i].colorFill.r;
+        color.g = containerVect[i].colorFill.g;
+        color.b = containerVect[i].colorFill.b;
         int cx = 0;
         int cy = 0;
-        for (int j = 0; j < pointAllVisible[i].size(); j++)
+        for (int j = 0; j < containerVect[i].pointAllVisible[0].size(); j++)
         {
-            cx += pointAllVisible[i][j].x;
-            cy += pointAllVisible[i][j].y;
+            cx += containerVect[i].pointAllVisible[0][j].x;
+            cy += containerVect[i].pointAllVisible[0][j].y;
         }
-        cx /= pointAllVisible[i].size();
-        cy /= pointAllVisible[i].size();
-        if (i == 17)
+        cx /= containerVect[i].pointAllVisible[0].size();
+        cy /= containerVect[i].pointAllVisible[0].size();
+        if (i == 18)
         {
-            cx = 250;
-            cy = 50;
-        }
-        areaB(cx, cy, color, color2, window, square);   
-    }
-    color.a = colorFill[18].a;
-    color.r = colorFill[18].r;
-    color.g = colorFill[18].g;
-    color.b = colorFill[18].b;
-    areaB(328, 55, color, color2, window, square);
-}
-
-
-void modeBDraw(RenderWindow& window, RectangleShape& square)
-{
-    int j, k;
-    //--------------------------------------------------------------------sutherlandHodgman---------------------------------------------------------------------------------------
-
-    for (int i = shapes.size() - 1; i > 0; i--)
-    {
-        j = i - 1;
-        while (j > 0)
-        {
-            ////iтый треугольник является отсекающей областью
-            sutherlandHodgman(shapes[i], shapes[j][0].x, shapes[j][0].y, shapes[j][1].x, shapes[j][1].y);
-            sutherlandHodgman(shapes[i], shapes[j][1].x, shapes[j][1].y, shapes[j][2].x, shapes[j][2].y);
-            sutherlandHodgman(shapes[i], shapes[j][2].x, shapes[j][2].y, shapes[j][0].x, shapes[j][0].y);
-           
-            if (i == 11 || i == 12 || i == 13 || i == 14)
-            {
-                sutherlandHodgman(shapes[j], shapes[i][0].x, shapes[i][0].y, shapes[i][1].x, shapes[i][1].y);
-                sutherlandHodgman(shapes[j], shapes[i][1].x, shapes[i][1].y, shapes[i][2].x, shapes[i][2].y);
-                sutherlandHodgman(shapes[j], shapes[i][2].x, shapes[i][2].y, shapes[i][0].x, shapes[i][0].y);
-            }
-            if ((!pointUnvisible.empty()))// && (pointUnvisible.size() > 2))
-            {
-                pointAllUnvisible.push_back(pointUnvisible);
-                pointUnvisible.clear();
-            }
-            j--;
-        }
-    }
-    
-    //---------------------------------------------------------------------сohenSutherlandUnvisible-----------------------------------------------------------------------------------------
-
-    /*for (int i = 15; i < shapes.size(); i++)
-    {
-        for (int j = 0; j < shapes[i].size() - 1; j++)
-        {
-            сohenSutherlandUnvisible(shapes[i][j].x, shapes[i][j].y, shapes[i][j + 1].x, shapes[i][j + 1].y, shapes[i]);
-        }
-        int t = shapes[i].size() - 1;
-        сohenSutherlandUnvisible(shapes[i][t].x, shapes[i][t].y, shapes[i][0].x, shapes[i][0].y, shapes[i]);
-        pointAllUnvisible.push_back(pointUnvisible);
-        pointUnvisible.clear();
-    }*/
-
-    //--------------------------------------------------------------------sutherlandHodgman get Visible part---------------------------------------------------------------------------------------
-    for (int i = shapes.size() - 1; i > 0; i--)
-    {
-        j = i - 1;
-        while (j > 0)
-        {
-            for (int k = 0; k < shapes[i].size() - 1; k++)
-            {
-                sutherlandHodgmanVisible(shapes[j], shapes[i][k].x, shapes[i][k].y, shapes[i][k + 1].x, shapes[i][k + 1].y);
-            }
-            int k = shapes[i].size() - 1;
-            sutherlandHodgmanVisible(shapes[j], shapes[i][k].x, shapes[i][k].y, shapes[i][0].x, shapes[i][0].y);
-            shapes[i] = pointVisible;
-            pointVisible.clear();
-            j--;
-        }
-        /*
-        for (int k = 0; k < shapes[j].size() - 1; k++)
-        {
-            sutherlandHodgman(shapes[i], shapes[j][k].x, shapes[j][k].y, shapes[j][k + 1].x, shapes[j][k + 1].y);
-        }
-        int k = shapes[j].size() - 1;
-        sutherlandHodgman(shapes[i], shapes[j][k].x, shapes[j][k].y, shapes[j][0].x, shapes[j][0].y);
-        for (int l = 0; l < shapes[i].size(); l++)
-        {
-            if ((pointVisible[0].x - shapes[i][0].x) * (by - ay) == (bx - ax) * (my - ay)) {
-                if (min(ay, by) <= my && (max(ay, by) >= my) && min(ax, bx) <= mx && max(ax, bx) >= mx) {
-                    cout << "YES";
-                    return 0;
-                }
-            }
-        }
-        shapes[i] = pointVisible;
-        pointVisible.clear();*/
-
-    }
-    //---------------------------------------------------------------------сohenSutherland-----------------------------------------------------------------------------------------
-
-    for (int i = 1; i < shapes.size(); i++)
-    {
-        for (int j = 0; j < shapes[i].size() - 1; j++)
-        {
-            сohenSutherland(shapes[i][j].x, shapes[i][j].y, shapes[i][j + 1].x, shapes[i][j + 1].y, shapes[i]);
-        }
-        int t = shapes[i].size() - 1;
-        сohenSutherland(shapes[i][t].x, shapes[i][t].y, shapes[i][0].x, shapes[i][0].y, shapes[i]);
-        pointAllVisible.push_back(pointVisible);
-        pointVisible.clear();
-    }
-
-
-    //---------------------------------------------------------------------сohenSutherlandForUnvisiblePart-----------------------------------------------------------------------------------------
-
-    for (int i = 0; i < pointAllUnvisible.size(); i++)
-    {
-        for (int j = 0; j < pointAllUnvisible[i].size() - 1; j++)
-        {
-            сohenSutherland(pointAllUnvisible[i][j].x, pointAllUnvisible[i][j].y, pointAllUnvisible[i][j + 1].x, pointAllUnvisible[i][j + 1].y, pointAllUnvisible[i]);
-        }
-        int t = pointAllUnvisible[i].size() - 1;
-        сohenSutherland(pointAllUnvisible[i][t].x, pointAllUnvisible[i][t].y, pointAllUnvisible[i][0].x, pointAllUnvisible[i][0].y, pointAllUnvisible[i]);
-        pointAllUnvisible[i] = pointVisible;
-        //pointAllVisible.push_back(pointVisible);
-        pointVisible.clear();
-    }
-
-
-    
-
-
-    //--------------------------------------------------------------------------отрисовка всего---------------------------------------------------------------------------------------------------
-    //отрисовка
-    Color color, color2;
-    /*for (int i = 1; i < shapes.size(); i++)
-    {
-
-        color2.a = colorOutline[i].a;
-        color2.r = colorOutline[i].r;
-        color2.g = colorOutline[i].g;
-        color2.b = colorOutline[i].b;
-        for (int j = 0; j < shapes[i].size() - 1; j++)
-        {
-            brezenham(shapes[i][j].x, shapes[i][j + 1].x, shapes[i][j].y, shapes[i][j + 1].y, color2, window, square);
-        }
-        brezenham(shapes[i][shapes[i].size() - 1].x, shapes[i][0].x, shapes[i][shapes[i].size() - 1].y, shapes[i][0].y, color2, window, square);
-
-        color.a = colorFill[i].a;
-        color.r = colorFill[i].r;
-        color.g = colorFill[i].g;
-        color.b = colorFill[i].b;
-        areaB(zPointAll[i].x, zPointAll[i].y, color, color2, window, square);
-    }
-    */
-
-    //--------------------------------------------------------------------------отрисовка сohenSutherland-----------------------------------------------------------------------------------------------------
-
-    k = pointAllVisible.size() - 1;
-    for (int i = 0; i <= k; i++)
-    {
-        Color color, color2;
-        color2.a = colorOutline[i + 1].a;
-        color2.r = colorOutline[i + 1].r;
-        color2.g = colorOutline[i + 1].g;
-        color2.b = colorOutline[i + 1].b;
-        for (int j = 0; j < pointAllVisible[i].size() - 1; j++)
-        {
-            brezenham(pointAllVisible[i][j].x, pointAllVisible[i][j + 1].x, pointAllVisible[i][j].y, pointAllVisible[i][j + 1].y, color2, window, square);
-        }
-        int k2 = pointAllVisible[i].size() - 1;
-        brezenham(pointAllVisible[i][k2].x, pointAllVisible[i][0].x, pointAllVisible[i][k2].y, pointAllVisible[i][0].y, color2, window, square);
-        //Sleep(200);
-        color.a = colorFill[i + 1].a;
-        color.r = colorFill[i + 1].r;
-        color.g = colorFill[i + 1].g;
-        color.b = colorFill[i + 1].b;
-        int cx = 0;
-        int cy = 0;
-        for (int j = 0; j < pointAllVisible[i].size(); j++)
-        {
-            cx += pointAllVisible[i][j].x;
-            cy += pointAllVisible[i][j].y;
-        }
-        cx /= pointAllVisible[i].size();
-        cy /= pointAllVisible[i].size();
-        if (i == 17)
-        {
-            cx = 250;
-            cy = 50;
+            areaB(328, 55, color, color2, window, square);
+            cx = 235;
+            cy = 55;
         }
         areaB(cx, cy, color, color2, window, square);
-    }
-    color.a = colorFill[18].a;
-    color.r = colorFill[18].r;
-    color.g = colorFill[18].g;
-    color.b = colorFill[18].b;
-    areaB(328, 55, color, color2, window, square);
-
-    
-
-    
-    //--------------------------------------------------------------------------отрисовка sutherlandHodgman---------------------------------------------------------------------------------------------------
-
-    k = pointAllUnvisible.size() - 1;
-    for (int i = k; i >= 0; i--)
-    {
-        //Color color, color2;
         color2.a = 255;
         color2.r = 5;
         color2.g = 255;
         color2.b = 5;
-        for (int j = 0; j < pointAllUnvisible[i].size() - 1; j++)
+        for (int k = 0; k < containerVect[i].pointAllUnvisible.size(); k++)
         {
-            brezenham(pointAllUnvisible[i][j].x, pointAllUnvisible[i][j + 1].x, pointAllUnvisible[i][j].y, pointAllUnvisible[i][j + 1].y, color2, window, square);
-        }
-        int k2 = pointAllUnvisible[i].size() - 1;
-        brezenham(pointAllUnvisible[i][k2].x, pointAllUnvisible[i][0].x, pointAllUnvisible[i][k2].y, pointAllUnvisible[i][0].y, color2, window, square);
-        //window.display();
-        //Sleep(900);
-        color.a = 255;
-        color.r = 200;
-        color.g = 200;
-        color.b = 0;
-        int cx = 0;
-        int cy = 0;
-        for (int j = 0; j < pointAllUnvisible[i].size(); j++)
-        {
-            cx += pointAllUnvisible[i][j].x;
-            cy += pointAllUnvisible[i][j].y;
-        }
-        cx /= pointAllUnvisible[i].size();
-        cy /= pointAllUnvisible[i].size();
-        if (i == 0)
-        {
-            cx = 345;
-            cy = 70;
-        }
-        if (i == 1)
-        {
-            cx = 205;
-            cy = 80;
-        }
-        if (i == 2)
-        {
-            cx = 260;
-            cy = 80;
-        }
-        if (i == 10)
-        {
-            cx = 317;
-            cy = 60;
-        }
-        if ((0, 5 * abs(pointAllUnvisible[i][0].x * pointAllUnvisible[i][1].y + pointAllUnvisible[i][1].x * pointAllUnvisible[i][2].y + pointAllUnvisible[i][2].x * pointAllUnvisible[i][0].y - pointAllUnvisible[i][1].x * pointAllUnvisible[i][0].y - pointAllUnvisible[i][2].x * pointAllUnvisible[i][1].y - pointAllUnvisible[i][0].x * pointAllUnvisible[i][2].y)) > 100)
-        {
-            areaB(cx, cy, color, color2, window, square);
+            for (int j = 0; j < containerVect[i].pointAllUnvisible[k].size() - 1; j++)
+            {
+                brezenham(containerVect[i].pointAllUnvisible[k][j].x, containerVect[i].pointAllUnvisible[k][j + 1].x, containerVect[i].pointAllUnvisible[k][j].y, containerVect[i].pointAllUnvisible[k][j + 1].y, color2, window, square);
+            }
+            int k2 = containerVect[i].pointAllUnvisible[k].size() - 1;
+            brezenham(containerVect[i].pointAllUnvisible[k][k2].x, containerVect[i].pointAllUnvisible[k][0].x, containerVect[i].pointAllUnvisible[k][k2].y, containerVect[i].pointAllUnvisible[k][0].y, color2, window, square);
+            color.a = 255;
+            color.r = 200;
+            color.g = 200;
+            color.b = 0;
+            int cx = 0;
+            int cy = 0;
+            for (int j = 0; j < containerVect[i].pointAllUnvisible[k].size(); j++)
+            {
+                cx += containerVect[i].pointAllUnvisible[k][j].x;
+                cy += containerVect[i].pointAllUnvisible[k][j].y;
+            }
+            cx /= containerVect[i].pointAllUnvisible[k].size();
+            cy /= containerVect[i].pointAllUnvisible[k].size();
+            if (k == 0 && i == 18)
+            {
+                cx = 345;
+                cy = 70;
+            }
+            if (k == 1 && i == 18)
+            {
+                cx = 205;
+                cy = 80;
+            }
+            if (k == 2 && i == 18)
+            {
+                cx = 260;
+                cy = 80;
+            }
+            if (k == 10 && i == 18)
+            {
+                cx = 317;
+                cy = 60;
+            }
+            if ((0, 5 * abs(containerVect[i].pointAllUnvisible[k][0].x * containerVect[i].pointAllUnvisible[k][1].y + containerVect[i].pointAllUnvisible[k][1].x * containerVect[i].pointAllUnvisible[k][2].y + containerVect[i].pointAllUnvisible[k][2].x * containerVect[i].pointAllUnvisible[k][0].y - containerVect[i].pointAllUnvisible[k][1].x * containerVect[i].pointAllUnvisible[k][0].y - containerVect[i].pointAllUnvisible[k][2].x * containerVect[i].pointAllUnvisible[k][1].y - containerVect[i].pointAllUnvisible[k][0].x * containerVect[i].pointAllUnvisible[k][2].y)) > 100)
+            {
+                areaB(cx, cy, color, color2, window, square);
+            }
         }
 
 
     }
-
-
 }
 
+void modeA(RenderWindow& window, RectangleShape& square)
+{
+    int k = containerVect.size() - 1;
+    for (int i = 1; i <= k; i++)
+    {
+        Color color, color2;
+        color2.a = containerVect[i].colorOutline.a;
+        color2.r = containerVect[i].colorOutline.r;
+        color2.g = containerVect[i].colorOutline.g;
+        color2.b = containerVect[i].colorOutline.b;
+        for (int l = 0; l < containerVect[i].pointAllVisible.size(); l++)
+        {
+            for (int j = 0; j < containerVect[i].pointAllVisible[l].size() - 1; j++)
+            {
+                brezenham(containerVect[i].pointAllVisible[l][j].x, containerVect[i].pointAllVisible[l][j + 1].x, containerVect[i].pointAllVisible[l][j].y, containerVect[i].pointAllVisible[l][j + 1].y, color2, window, square);
+            }
+            int k2 = containerVect[i].pointAllVisible[l].size() - 1;
+            brezenham(containerVect[i].pointAllVisible[l][k2].x, containerVect[i].pointAllVisible[l][0].x, containerVect[i].pointAllVisible[l][k2].y, containerVect[i].pointAllVisible[l][0].y, color2, window, square);
+        }
+        //Sleep(200);
+        color.a = containerVect[i].colorFill.a;
+        color.r = containerVect[i].colorFill.r;
+        color.g = containerVect[i].colorFill.g;
+        color.b = containerVect[i].colorFill.b;
+        int cx = 0;
+        int cy = 0;
+        for (int j = 0; j < containerVect[i].pointAllVisible[0].size(); j++)
+        {
+            cx += containerVect[i].pointAllVisible[0][j].x;
+            cy += containerVect[i].pointAllVisible[0][j].y;
+        }
+        cx /= containerVect[i].pointAllVisible[0].size();
+        cy /= containerVect[i].pointAllVisible[0].size();
+        if (i == 18)
+        {
+            areaB(328, 55, color, color2, window, square);
+            cx = 235;
+            cy = 55;
+        }
+        areaB(cx, cy, color, color2, window, square);
+    }
+
+}
 
 int main()
 {
@@ -1483,20 +1125,90 @@ int main()
 
     
 
-    shapesInit(shapes, zPointAll, colorFill, colorOutline);
+    
     Color color1(255, 255, 255);
     window.clear(color1);
     int j, k;
     texture.create(800, 800);
+
+    
+    shapesInit();
+    //--------------------------------------------------------------------get container data part---------------------------------------------------------------------------------------
+
+    for (int i = containerVect.size() - 1; i > 0; i--)
+    {
+        j = i - 1;
+        containerVect[i].pointAllVisible.push_back(containerVect[i].shape);
+        
+        //------------------------------------------------------------sutherlandHodgman------------------------------------------------------------------------------------------
+        while (j > 0)
+        {
+            sutherlandHodgman(containerVect[i].shape, containerVect[j].shape[0].x, containerVect[j].shape[0].y, containerVect[j].shape[1].x, containerVect[j].shape[1].y); // get Unvisible part
+            sutherlandHodgman(containerVect[i].shape, containerVect[j].shape[1].x, containerVect[j].shape[1].y, containerVect[j].shape[2].x, containerVect[j].shape[2].y); // get Unvisible part
+            sutherlandHodgman(containerVect[i].shape, containerVect[j].shape[2].x, containerVect[j].shape[2].y, containerVect[j].shape[0].x, containerVect[j].shape[0].y); // get Unvisible part
+            k = containerVect[i].shape.size() - 1;
+            if (i == 11 || i == 12 || i == 13 || i == 14)
+            {
+                for (int k = 0; k < containerVect[i].shape.size() - 1; k++)
+                {
+                    sutherlandHodgman(containerVect[j].shape, containerVect[i].shape[k].x, containerVect[i].shape[k].y, containerVect[i].shape[k + 1].x, containerVect[i].shape[k + 1].y); // get Unvisible part
+                }
+                sutherlandHodgman(containerVect[j].shape, containerVect[i].shape[k].x, containerVect[i].shape[k].y, containerVect[i].shape[0].x, containerVect[i].shape[0].y); // get Unvisible part
+            }
+            if (container.pointUnvisible.size() > 2)
+            {
+                containerVect[i].pointAllUnvisible.push_back(container.pointUnvisible);
+                container.pointUnvisible.clear();
+            }
+            for (int k = 0; k < containerVect[i].pointAllVisible[0].size() - 1; k++)
+            {
+                sutherlandHodgmanVisible(containerVect[j].shape, containerVect[i].pointAllVisible[0][k].x, containerVect[i].pointAllVisible[0][k].y, containerVect[i].pointAllVisible[0][k + 1].x, containerVect[i].pointAllVisible[0][k + 1].y); // get Visible part
+            }
+            int k = containerVect[i].pointAllVisible[0].size() - 1;
+            sutherlandHodgmanVisible(containerVect[j].shape, containerVect[i].pointAllVisible[0][k].x, containerVect[i].pointAllVisible[0][k].y, containerVect[i].pointAllVisible[0][0].x, containerVect[i].pointAllVisible[0][0].y); // get Visible part
+            containerVect[i].pointAllVisible[0] = container.pointVisible;
+            
+            container.pointVisible.clear();
+            
+            j--;
+        }
+        //--------------------------------------------------------------сohenSutherland----------------------------------------------------------------------------------
+        for (int l = 0; l < containerVect[i].pointAllVisible.size(); l++)
+        {
+            for (j = 0; j < containerVect[i].pointAllVisible[l].size() - 1; j++)
+            {
+                сohenSutherland(containerVect[i].pointAllVisible[l][j].x, containerVect[i].pointAllVisible[l][j].y, containerVect[i].pointAllVisible[l][j + 1].x, containerVect[i].pointAllVisible[l][j + 1].y, containerVect[i].pointAllVisible[l], containerVect[0].shape[0].x, containerVect[0].shape[0].y, containerVect[0].shape[2].x, containerVect[0].shape[2].y);
+            }
+            int t = containerVect[i].pointAllVisible[l].size() - 1;
+            сohenSutherland(containerVect[i].pointAllVisible[l][t].x, containerVect[i].pointAllVisible[l][t].y, containerVect[i].pointAllVisible[l][0].x, containerVect[i].pointAllVisible[l][0].y, containerVect[i].pointAllVisible[l], containerVect[0].shape[0].x, containerVect[0].shape[0].y, containerVect[0].shape[2].x, containerVect[0].shape[2].y);
+            containerVect[i].pointAllVisible[l] = container.pointVisible;
+            container.pointVisible.clear();
+            if (container.pointUnvisible.size() > 2)
+            {
+                containerVect[i].pointAllUnvisible.push_back(container.pointUnvisible);
+                container.pointUnvisible.clear();
+            }
+               
+        }
+
+
+    }
+
+
+    //--------------------------------------------------------------------draw part---------------------------------------------------------------------------------------
+
+    //modeB(window, square);
+       
+    int i = 0;
     
     int choice = 0;
     if (choice == 0)
     {
-        modeADraw(window, square);
+        modeA(window, square);
     }
     else
     {
-        modeBDraw(window, square);
+        modeB(window, square);
     }
     
     
