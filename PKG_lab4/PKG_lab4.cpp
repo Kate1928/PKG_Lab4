@@ -634,6 +634,96 @@ void areaB(int xz, int yz, Color color, Color colorOutline, RenderWindow& window
     }
 }
 
+void areaBGrad(int xz, int yz, Color color, Color colorOutline, RenderWindow& window, RectangleShape& square)
+{
+    stack <Container::point> stack;
+    Container::point p;
+    p.x = xz;
+    p.y = yz;
+    stack.push(p);
+    square.setFillColor(color);
+    int distance;
+
+    while (!stack.empty())
+    {
+        p = stack.top();
+        stack.pop();
+
+        int x = p.x;
+        int y = p.y;
+        texture.update(window);
+        Sprite sprite;
+        sprite.setTexture(texture);
+
+        image = texture.copyToImage();
+        window.display();
+        //Sleep(20);
+        window.clear();
+        window.draw(sprite);
+        Color color2;
+        color2.a = 255;
+        color2.r = 255;
+        color2.g = 255;
+        color2.b = 255;
+        if (((x / 127) % 2 == 0))
+        {
+            color.a = 255;
+            color.r = color.r;
+            color.g = (2 * x) % 255;
+            color.b = y % 255;
+            if (x % 127 == 0)
+            {
+                color.g = 255 - ((2 * x) % 255);
+            }
+        }
+        else
+        {
+            
+            color.a = 255;
+            color.r = color.r;
+            color.g = 255 - ((2 * x) % 255);
+            color.b = y % 255;
+            if (x % 127 == 0)
+            {
+                color.g = ((2 * x) % 255);
+            }
+        }
+        
+        square.setFillColor(color);
+        if (image.getPixel(x + 1, y) == color2 && image.getPixel(x + 1, y) != colorOutline)
+        {
+            p.x = x + 1;
+            square.setPosition(p.x, p.y);
+            window.draw(square);
+            stack.push(p);
+        }
+        if (image.getPixel(x - 1, y) == color2 && image.getPixel(x - 1, y) != colorOutline)
+        {
+            p.x = x - 1;
+            square.setPosition(p.x, p.y);
+            window.draw(square);
+            //Sleep(20);
+            stack.push(p);
+        }
+        p.x = x;
+        if (image.getPixel(x, y + 1) == color2 && image.getPixel(x, y + 1) != colorOutline)
+        {
+            p.y = y + 1;
+            square.setPosition(p.x, p.y);
+            window.draw(square);
+            stack.push(p);
+        }
+        if (image.getPixel(x, y - 1) == color2 && image.getPixel(x, y - 1) != colorOutline)
+        {
+            p.y = y - 1;
+            square.setPosition(p.x, p.y);
+            window.draw(square);
+            stack.push(p);
+        }
+
+    }
+}
+
 bool pointBelong(vector<Container::point> shape, int x0, int y0)
 {
     
@@ -654,6 +744,7 @@ bool intersection_lineseg(int x1, int y1, int x2, int y2, int xa, int ya, int xb
 {
     container.crossPoint.x = -1;
     container.crossPoint.y = -1;
+    
     if (x2 == x1 && xb == xa)
         return false;
     else if (x2 == x1)
@@ -979,6 +1070,44 @@ void сohenSutherland(int x1, int y1, int x2, int y2, vector<Container::point> s
     }
 }
 
+void rotate(int fi, int t)
+{
+    int x0 = 0;
+    int y0 = 0;
+    for (int i = 0; i < containerVect[t].pointAllVisible[0].size(); i++)
+    {
+        x0 += containerVect[t].pointAllVisible[0][i].x;
+        y0 += containerVect[t].pointAllVisible[0][i].y;
+    }
+    x0 /= containerVect[t].pointAllVisible[0].size();
+    y0 /= containerVect[t].pointAllVisible[0].size();
+    for (int i = 0; i < containerVect[t].pointAllVisible[0].size(); i++)
+    {
+        double x_shifted = containerVect[t].pointAllVisible[0][i].x - x0;
+        double y_shifted = containerVect[t].pointAllVisible[0][i].y - y0;
+        containerVect[t].pointAllVisible[0][i].x = x0 + (x_shifted * cos(fi) - y_shifted * sin(fi));
+        containerVect[t].pointAllVisible[0][i].y = y0 + (x_shifted * sin(fi) + y_shifted * cos(fi));
+    }
+    /*for (int i = 0; i < containerVect[t].pointAllUnvisible.size(); i++)
+    {
+        for (int j = 0; j < containerVect[t].pointAllUnvisible[i].size(); j++)
+        {
+            x0 += containerVect[t].pointAllUnvisible[i][j].x;
+            y0 += containerVect[t].pointAllUnvisible[i][j].y;
+        }
+        x0 /= containerVect[t].pointAllUnvisible[i].size();
+        y0 /= containerVect[t].pointAllUnvisible[i].size();
+        for (int j = 0; j < containerVect[t].pointAllUnvisible[i].size(); j++)
+        {
+            double x_shifted = containerVect[t].pointAllUnvisible[i][j].x - x0;
+            double y_shifted = containerVect[t].pointAllUnvisible[i][j].x - y0;
+            containerVect[t].pointAllUnvisible[i][j].x = x0 + x_shifted * cos(fi) - y_shifted * sin(fi);
+            containerVect[t].pointAllUnvisible[i][j].x = y0 + x_shifted * sin(fi) + y_shifted * cos(fi);
+        }
+    }*/
+}
+
+
 void modeB(RenderWindow& window, RectangleShape& square)
 {
     int k = containerVect.size() - 1;
@@ -1118,6 +1247,51 @@ void modeA(RenderWindow& window, RectangleShape& square)
 
 }
 
+void modeAGrad(RenderWindow& window, RectangleShape& square)
+{
+    int k = containerVect.size() - 1;
+    for (int i = 1; i <= k; i++)
+    {
+        Color color, color2;
+        color2.a = containerVect[i].colorOutline.a;
+        color2.r = containerVect[i].colorOutline.r;
+        color2.g = containerVect[i].colorOutline.g;
+        color2.b = containerVect[i].colorOutline.b;
+        for (int l = 0; l < containerVect[i].pointAllVisible.size(); l++)
+        {
+            for (int j = 0; j < containerVect[i].pointAllVisible[l].size() - 1; j++)
+            {
+                brezenham(containerVect[i].pointAllVisible[l][j].x, containerVect[i].pointAllVisible[l][j + 1].x, containerVect[i].pointAllVisible[l][j].y, containerVect[i].pointAllVisible[l][j + 1].y, color2, window, square);
+            }
+            int k2 = containerVect[i].pointAllVisible[l].size() - 1;
+            brezenham(containerVect[i].pointAllVisible[l][k2].x, containerVect[i].pointAllVisible[l][0].x, containerVect[i].pointAllVisible[l][k2].y, containerVect[i].pointAllVisible[l][0].y, color2, window, square);
+        }
+        //Sleep(200);
+        color.a = containerVect[i].colorFill.a;
+        color.r = containerVect[i].colorFill.r;
+        color.g = containerVect[i].colorFill.g;
+        color.b = containerVect[i].colorFill.b;
+        int cx = 0;
+        int cy = 0;
+        for (int j = 0; j < containerVect[i].pointAllVisible[0].size(); j++)
+        {
+            cx += containerVect[i].pointAllVisible[0][j].x;
+            cy += containerVect[i].pointAllVisible[0][j].y;
+        }
+        cx /= containerVect[i].pointAllVisible[0].size();
+        cy /= containerVect[i].pointAllVisible[0].size();
+        if (i == 18)
+        {
+            areaBGrad(328, 55, color, color2, window, square);
+            cx = 235;
+            cy = 55;
+        }
+        areaBGrad(cx, cy, color, color2, window, square);
+    }
+
+}
+
+
 int main()
 {
     RenderWindow window(VideoMode(800, 800), "Lab4");
@@ -1196,13 +1370,39 @@ int main()
 
 
     //--------------------------------------------------------------------draw part---------------------------------------------------------------------------------------
+    
+    cout << "Rotate?(1/0) ";
+    int rotateQ, fi, nomber;
+    cin >> rotateQ;
+    if (rotateQ == 1)
+    {
+        cout << endl << "angle?";
+        cin >> fi;
+        cout << endl << "nomber?";
+        cin >> nomber;
+        rotate(fi, nomber);
+        modeAGrad(window, square);
+    }
+    else
+    {
+        int choice = 0;
+        if (choice == 0)
+        {
+            modeA(window, square);
+        }
+        else
+        {
+            modeB(window, square);
+        }
+    }
+    
 
-    //modeB(window, square);
+    
        
     int i = 0;
     
-    int choice = 0;
-    if (choice == 0)
+    
+    /*if (choice == 0)
     {
         modeA(window, square);
     }
@@ -1210,7 +1410,7 @@ int main()
     {
         modeB(window, square);
     }
-    
+    */
     
 
     //window.display();
